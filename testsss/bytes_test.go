@@ -8,7 +8,7 @@ func TestBytes(t *testing.T) {
 	s := "123"
 	ps := &s
 
-	// Copy to b
+	// Copy to b, A new space
 	b := []byte(*ps)
 
 	s += "4"
@@ -16,6 +16,6 @@ func TestBytes(t *testing.T) {
 
 	b[1] = '0'
 
-	t.Log(*ps)
-	t.Log(string(b))
+	t.Log(*ps) // 12345
+	t.Log(string(b)) // 103
 }
