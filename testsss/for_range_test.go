@@ -21,6 +21,13 @@ func TestForRangeCopyValueFixe(t *testing.T) {
 	}
 }
 
-func TestEscape(t *testing.T) {
-	
+func TestTemporaryPointer(t *testing.T) {
+	store := make(map[int]*int)
+	for i := 0; i < 5; i++ {
+		store[i] = &i
+	}
+	// v is a value copy
+	for _, v := range store {
+		t.Log(*v)
+	}
 }
