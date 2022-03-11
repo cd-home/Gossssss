@@ -21,7 +21,7 @@ func TestUnsafePointer(t *testing.T) {
 func TestUnsafePointerOriginSlice(t *testing.T) {
 	sli := make([]int, 10)
 
-	for i, _ := range sli {
+	for i := range sli {
 		sli[i] = i
 	}
 
