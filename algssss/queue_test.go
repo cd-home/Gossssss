@@ -1,4 +1,4 @@
-package leetcodesss
+package algssss
 
 type ArrayQueue struct {
 	q    []interface{}

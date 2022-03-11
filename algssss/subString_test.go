@@ -1,4 +1,4 @@
-package algsss
+package algssss
 
 import (
 	"testing"

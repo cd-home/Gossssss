@@ -1,4 +1,4 @@
-package leetcodesss
+package algssss
 
 type Stacker interface {
 	Push(item interface{})

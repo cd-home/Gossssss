@@ -1,4 +1,4 @@
-package leetcodesss
+package algssss
 
 /*
 你需要着重掌握它的三个容易出错的地方：循环退出条件、mid 的取值，low 和 high 的更新。
