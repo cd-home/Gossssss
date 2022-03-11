@@ -9,7 +9,10 @@ import (
 func TestWaitGroup(t *testing.T) {
 	wg := sync.WaitGroup{}
 	testMap := make(map[int]int)
-	lock := &sync.Mutex{}
+
+	// lock := &sync.Mutex{}
+	// rezo value can be used
+	var lock sync.Mutex
 
 	wg.Add(3)
 
