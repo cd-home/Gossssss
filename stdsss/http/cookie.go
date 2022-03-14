@@ -18,7 +18,7 @@ func SetCookies(rw http.ResponseWriter, r *http.Request) {
 		Msg:  "Hello World JSON",
 		Data: "data",
 	}
-
+	// Name must not include spaces
 	ck := &http.Cookie{
 		Name:     "GodYao",
 		Value:    "27",
