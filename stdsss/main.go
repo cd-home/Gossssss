@@ -7,5 +7,6 @@ import (
 func main() {
 	// api.SimpleServer()
 	// api.FileServer()
-	api.RouterServer()
+	// api.RouterServer()
+	api.JSONServer()
 }
