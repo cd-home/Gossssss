@@ -9,5 +9,6 @@ func main() {
 	// api.FileServer()
 	// api.RouterServer()
 	// api.JSONServer()
-	api.CookieServer()
+	// api.CookieServer()
+	api.TemplateServer()
 }
