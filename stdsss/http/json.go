@@ -13,18 +13,27 @@ func EncodeJSON(rw http.ResponseWriter, r *http.Request) {
 		Msg  string      `json:"msg"`
 		Data interface{} `json:"data"`
 	}
-	rw.Header().Set("Content-Type", "application/json")
 	rsp := &JSONResponse{
 		Code: 1,
 		Msg:  "Hello World JSON",
 		Data: "data",
 	}
+
+	ck := &http.Cookie{
+		Name:     "God Yao",
+		Value:    "27",
+		HttpOnly: true,
+		MaxAge:   1 * 60 * 60 * 2,
+	}
+	http.SetCookie(rw, ck)
+
+	// rw.Header().Add("Content-Type", "application/json")
 	data, _ := json.Marshal(rsp)
 	fmt.Fprintln(rw, string(data))
 }
 
 type DecodeInputJSON struct {
-	Title string `json:"title"`
+	Title  string `json:"title"`
 	Author string `json:"author"`
 }
 
