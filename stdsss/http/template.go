@@ -16,6 +16,7 @@ func Template(rw http.ResponseWriter, r *http.Request) {
 	}
 	//template.HTMLEscaper()
 	// 解析文件
+	// tmpl := template.Must(template.ParseFiles("layout.html"))
 	t, _ := template.ParseFiles("./static/index.html")
 	// 填充模版
 	_ = t.Execute(rw, data)
