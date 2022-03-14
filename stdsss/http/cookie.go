@@ -37,11 +37,14 @@ func SetCookies(rw http.ResponseWriter, r *http.Request) {
 	fmt.Fprintln(rw, string(data))
 }
 
-
 // SetCookies Handler
 func GetCookies(rw http.ResponseWriter, r *http.Request) {
 	ck, _ := r.Cookie("GodYao")
-	fmt.Fprintln(rw, string(ck.Name + ck.Value))
+
+	rw.Header().Set("Location", "https://www.baidu.com")
+	// rw.WriteHeader(http.StatusMovedPermanently) // 永久重定向
+	rw.WriteHeader(http.StatusFound) // 临时重定向
+	fmt.Fprintln(rw, string(ck.Name+ck.Value))
 }
 
 func CookieServer() {
