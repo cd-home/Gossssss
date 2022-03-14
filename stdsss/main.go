@@ -1,12 +1,14 @@
 package main
 
 import (
-	"net/http"
 	api "Gossssss/stdsss/http"
+	"net/http"
 )
 
 func main() {
 	http.HandleFunc("/", api.HelloWorld)
+
+	http.HandleFunc("/upload", api.UploadFile)
 
 	api.FileServer()
 
