@@ -10,5 +10,7 @@ func main() {
 	// api.RouterServer()
 	// api.JSONServer()
 	// api.CookieServer()
-	api.TemplateServer()
+	// api.TemplateServer()
+
+	api.DefineYourServer()
 }
