@@ -25,8 +25,14 @@ func SetCookies(rw http.ResponseWriter, r *http.Request) {
 		HttpOnly: true,
 		MaxAge:   1 * 60 * 60 * 2,
 	}
+	// Set Cookie
 	http.SetCookie(rw, ck)
+
+	// Set Header
 	rw.Header().Add("Content-Type", "application/json")
+
+	// Set HTTP Code
+	rw.WriteHeader(http.StatusOK)
 	data, _ := json.Marshal(rsp)
 	fmt.Fprintln(rw, string(data))
 }
