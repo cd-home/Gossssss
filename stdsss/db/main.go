@@ -7,10 +7,13 @@ import (
 )
 
 func main() {
+	// open 不是真正的去链接数据库， db本身就是自带连接池
+	// 所以不要去多次Open和Close
 	db, err := sql.Open("mysql", "root:root@123456@tcp(127.0.0.1:3306)/hello")
 	if err != nil {
 		log.Fatal(err)
 	}
+	// 连接数据库
 	err = db.Ping()
 	if err != nil {
 		log.Fatal(err)
