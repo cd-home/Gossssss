@@ -17,6 +17,7 @@ func TestWaitGroup(t *testing.T) {
 	wg.Add(3)
 
 	for i := 0; i < 3; i++ {
+		// closure
 		go func(j int) {
 			defer wg.Done()
 			lock.Lock()
