@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	// go build -gcflags '-m -l' main.go
 	value := build.Escape(1)
 	fmt.Println(value, *value)
 }
