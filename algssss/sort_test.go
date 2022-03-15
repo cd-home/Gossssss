@@ -1,10 +1,9 @@
 package algssss
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
-
 
 func BubbleSort(arr []int) {
 	l := len(arr)
@@ -16,7 +15,7 @@ func BubbleSort(arr []int) {
 		// 每一轮做什么, 一个数和剩下的比较
 		// 每一轮进来定义一个是否有数据交换的标志
 		flag := false
-		for j := 0; j < l - 1; j++ {
+		for j := 0; j < l-1; j++ {
 			if arr[j] > arr[j+1] {
 				arr[j], arr[j+1] = arr[j+1], arr[j]
 				flag = true
@@ -33,7 +32,7 @@ func MergeSort(arr []int) {
 	if l <= 1 {
 		return
 	}
-	RecurMerge(arr, 0, l - 1)
+	RecurMerge(arr, 0, l-1)
 }
 
 func RecurMerge(arr []int, start, end int) {
@@ -42,16 +41,16 @@ func RecurMerge(arr []int, start, end int) {
 	}
 	mid := (start + end) / 2
 	RecurMerge(arr, start, mid)
-	RecurMerge(arr, mid + 1, end)
+	RecurMerge(arr, mid+1, end)
 	Merge(arr, start, mid, end)
 }
 
 func Merge(arr []int, start, mid, end int) {
-	tempArr := make([]int, end - start + 1)
+	tempArr := make([]int, end-start+1)
 	i := start
 	j := mid + 1
 	k := 0
-	for ; i <= mid && j <= end ; k++ {
+	for ; i <= mid && j <= end; k++ {
 		if arr[i] <= arr[j] {
 			tempArr[k] = arr[i]
 			i++
@@ -60,11 +59,11 @@ func Merge(arr []int, start, mid, end int) {
 			j++
 		}
 	}
-	for ; i <= mid ; i++ {
+	for ; i <= mid; i++ {
 		tempArr[k] = arr[i]
 		k++
 	}
-	for ; j <= end ; j++ {
+	for ; j <= end; j++ {
 		tempArr[k] = arr[j]
 		k++
 	}
@@ -72,7 +71,7 @@ func Merge(arr []int, start, mid, end int) {
 }
 
 func QuickSort(arr []int) {
-	separateSort(arr, 0, len(arr) - 1)
+	separateSort(arr, 0, len(arr)-1)
 }
 
 func separateSort(arr []int, start, end int) {
@@ -80,8 +79,8 @@ func separateSort(arr []int, start, end int) {
 		return
 	}
 	i := partition(arr, start, end)
-	separateSort(arr, start, i - 1)
-	separateSort(arr, i + 1, end)
+	separateSort(arr, start, i-1)
+	separateSort(arr, i+1, end)
 }
 
 func partition(arr []int, start, end int) int {
@@ -98,11 +97,9 @@ func partition(arr []int, start, end int) int {
 		}
 	}
 	arr[i], arr[end] = arr[end], arr[i]
-	fmt.Println(arr)
 	return i
 }
 
 func TestBubbleSort(t *testing.T) {
 
 }
-
