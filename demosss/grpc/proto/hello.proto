@@ -1,0 +1,14 @@
+syntax="proto3";
+
+service HelloService {
+    rpc SayHi(HelloRequest) returns(HelloResponse);
+    rpc GetUpperName(HelloRequest) returns(HelloResponse);
+}
+
+message HelloRequest {
+    string name = 1;
+}
+
+message HelloResponse {
+    string msg = 1;
+}
