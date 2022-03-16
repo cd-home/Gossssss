@@ -1,6 +1,5 @@
 # Gossssss
 Gossssss
-> .
 ├── README.md
 ├── algssss
 ├── bestpracticesss
