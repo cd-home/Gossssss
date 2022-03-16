@@ -3,7 +3,6 @@ package grpc
 import (
 	pb "Gossssss/demosss/grpc/proto"
 	"context"
-	"fmt"
 	"testing"
 
 	"google.golang.org/grpc"
@@ -23,11 +22,11 @@ func TestClient(t *testing.T) {
 		context.Background(),
 		&pb.HelloRequest{Name: "li_yao"})
 
-	fmt.Println(response1.Msg)
+	t.Log(response1.Msg)
 
 	response2, _ := client.GetUpperName(
 		context.Background(), &pb.HelloRequest{
 			Name: "li_yao",
 		})
-	fmt.Println(response2.Msg)
+	t.Log(response2.Msg)
 }
