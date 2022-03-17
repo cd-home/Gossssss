@@ -1,7 +1,6 @@
 package offersss
 
 import (
-	"math"
 	"testing"
 )
 
