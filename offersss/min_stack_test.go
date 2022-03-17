@@ -22,18 +22,22 @@ type MinStack struct {
 func ConstructorStack() MinStack {
 	return MinStack{
 		stack: make([]int, 0),
-		min:   []int{math.MaxInt64},
+		min:   make([]int, 0),
 	}
 }
 
 func (ms *MinStack) Push(x int) {
 	ms.stack = append(ms.stack, x)
-	m := ms.Min()
-	// 注意需要同步增长，保证每一个添加的x, 在min中都有一个同时期的最小值
-	if x < m {
-		ms.min = append(ms.min, x)
+	if len(ms.stack) > 0 {
+		m := ms.Min()
+		// 注意需要同步增长，保证每一个添加的x, 在min中都有一个同时期的最小值
+		if x < m {
+			ms.min = append(ms.min, x)
+		} else {
+			ms.min = append(ms.min, m)
+		}
 	} else {
-		ms.min = append(ms.min, m)
+		ms.min = append(ms.min, x)
 	}
 }
 
