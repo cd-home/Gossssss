@@ -3,8 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/olivere/elastic/v7"
 	"reflect"
+
+	"github.com/olivere/elastic/v7"
 )
 
 func main() {
