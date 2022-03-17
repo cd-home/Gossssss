@@ -20,7 +20,7 @@ func FindRepeatNumber(arr []int) int {
 func FindRepeatNumberBySort(arr []int) int {
 	// slice sort
 	sort.Ints(sort.IntSlice(arr))
-	for i, _ := range arr {
+	for i := range arr {
 		if arr[i] == arr[i+1] {
 			return arr[i]
 		}
