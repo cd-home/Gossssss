@@ -62,9 +62,9 @@ func TestZapDefinePractice(t *testing.T) {
 		return lvl >= zapcore.WarnLevel
 	})
 
-	// lowPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
-	// 	return lvl < zapcore.ErrorLevel
-	// })
+	lowPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
+		return lvl < zapcore.ErrorLevel
+	})
 
 	kafkaEncode := zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig())
 	// Discard is an io.Writer on which all Write calls succeed without doing anything.
@@ -77,14 +77,14 @@ func TestZapDefinePractice(t *testing.T) {
 
 	// all core
 	cores = append(cores, zapcore.NewCore(kafkaEncode, topicDebugging, highPriority))
-	cores = append(cores, zapcore.NewCore(consoleEncoder, consoleDebugging, highPriority))
+	cores = append(cores, zapcore.NewCore(consoleEncoder, consoleDebugging, lowPriority))
 	core := zapcore.NewTee(cores...)
 
 	log := zap.New(core)
 	defer log.Sync()
 	log = log.WithOptions(zap.Fields(zap.Field{Key: "module", String: "user", Type: zapcore.StringType}))
 
-	// set highPriority or lowPriority, while excute info debug warn error will check
+	// set highPriority or lowPriority, while execute info debug warn error will check
 	log.Info("info", zap.String("test", "tes2"))
 	log.Debug("debug", zap.String("test", "tes2"))
 
