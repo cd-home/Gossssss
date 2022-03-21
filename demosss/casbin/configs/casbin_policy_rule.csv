@@ -1,5 +1,5 @@
-p, admin, data/*, read
-p, admin, data/*, write
+p, admin, data/*, read, gz
+p, admin, data/*, write, gz
 
 p, alice, data/1, read
 p, alice, data/1, write
