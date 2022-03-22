@@ -11,6 +11,7 @@ func HelloWorld(rw http.ResponseWriter, r *http.Request) {
 }
 
 func SimpleServer() {
-	http.HandleFunc("/", logging(HelloWorld))
+	// http.HandleFunc("/", logging(HelloWorld))
+	http.HandleFunc("/", Chain(HelloWorld, Method("POST"), Logging()))
 	http.ListenAndServe(":8080", nil)
 }

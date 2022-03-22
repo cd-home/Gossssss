@@ -24,6 +24,6 @@ func Template(rw http.ResponseWriter, r *http.Request) {
 
 
 func TemplateServer() {
-	http.HandleFunc("/template", Template)
+	http.HandleFunc("/template", logging(Template))
 	http.ListenAndServe(":8080", nil)
 }
