@@ -1,0 +1,12 @@
+p, admin, data/1, read
+p, admin, data/1, write
+
+p, admin, data/2, read
+p, admin, data/2, write
+
+p, alice, data/1, read
+p, alice, data/1, write
+
+p, developer, data/2, read
+
+g, bob, developer
