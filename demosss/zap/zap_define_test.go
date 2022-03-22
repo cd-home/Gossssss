@@ -63,7 +63,7 @@ func TestZapDefinePractice(t *testing.T) {
 	})
 
 	lowPriority := zap.LevelEnablerFunc(func(lvl zapcore.Level) bool {
-		return lvl < zapcore.ErrorLevel
+		return lvl >= zapcore.InfoLevel
 	})
 
 	kafkaEncode := zapcore.NewJSONEncoder(zap.NewProductionEncoderConfig())
@@ -85,9 +85,8 @@ func TestZapDefinePractice(t *testing.T) {
 	log = log.WithOptions(zap.Fields(zap.Field{Key: "module", String: "user", Type: zapcore.StringType}))
 
 	// set highPriority or lowPriority, while execute info debug warn error will check
-	log.Info("info", zap.String("test", "tes2"))
 	log.Debug("debug", zap.String("test", "tes2"))
-
+	log.Info("info", zap.String("test", "tes2"))
 	log.Warn("warn", zap.String("test", "tes2"))
 	log.Error("error", zap.String("test", "tes2"))
 }

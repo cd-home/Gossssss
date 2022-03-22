@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-func main() {
+func main1() {
 	//	注意，反射是依赖接口的
 
 	// reflect.Type 表示Go的类型   reflect.Value 装载任意类型的值
