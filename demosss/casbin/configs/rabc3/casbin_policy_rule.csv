@@ -1,0 +1,13 @@
+p, admin, prod, read
+p, admin, prod, write
+
+p, admin, dev, read
+p, admin, dev, write
+
+p, developer, dev, read
+p, developer, dev, write
+
+g, bob, developer
+
+g2, data/1, prod
+g2, data/2, dev
