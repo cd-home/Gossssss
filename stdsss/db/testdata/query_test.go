@@ -29,7 +29,7 @@ func TestQuery(t *testing.T) {
 	// always 注意必须关闭， 关闭是有可能发生错误的，可以捕获记录
 	defer rows.Close()
 	for rows.Next() {
-		var s sql.NullString
+		// var s sql.NullString
 		// 必须是指针
 		err := rows.Scan(&id, &name)
 		if err != nil {
