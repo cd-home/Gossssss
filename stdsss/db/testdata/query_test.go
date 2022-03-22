@@ -36,9 +36,9 @@ func TestQuery(t *testing.T) {
 			t.Log(err)
 		}
 		// 判断是否是空
-		if s.Valid {
+		// if s.Valid {
 
-		}
+		// }
 		t.Log(id, name)
 	}
 	// 必须在迭代获取之后，检查错误（循环可能由于某种原因退出）
