@@ -17,7 +17,6 @@ func (a *Animal) Speak() {
 	fmt.Println("My Name is", a.Name, ", it is", a.IsMammal, ", I am a mammal")
 }
 
-
 type Dog struct {
 	// embedding
 	Animal
@@ -28,7 +27,6 @@ func (d *Dog) Speak() {
 	fmt.Println("My Name is", d.Name, ", it is", d.IsMammal, ", I am a mammal", d.PackFactor)
 }
 
-
 type Cat struct {
 	Animal
 	ClimbFactor int
@@ -37,7 +35,6 @@ type Cat struct {
 func (c *Cat) Speak() {
 	fmt.Println("My Name is", c.Name, ", it is", c.IsMammal, ", I am a mammal", c.ClimbFactor)
 }
-
 
 func TestMain(test *testing.T) {
 	animal := Animal{
@@ -48,7 +45,7 @@ func TestMain(test *testing.T) {
 
 	d := Dog{
 		Animal: Animal{
-			Name: "JO",
+			Name:     "JO",
 			IsMammal: true,
 		},
 		PackFactor: 12,
@@ -57,7 +54,7 @@ func TestMain(test *testing.T) {
 
 	c := Cat{
 		Animal: Animal{
-			Name: "JO",
+			Name:     "JO",
 			IsMammal: true,
 		},
 		ClimbFactor: 10,
@@ -65,52 +62,66 @@ func TestMain(test *testing.T) {
 	c.Speak()
 }
 
-func TestEmbeddingNotinheritance(t *testing.T) {
+func TestEmbeddingNotInheritance(t *testing.T) {
 	// Can not compile Dog is Dog Cat is Cat
 	/*
-	animals := []Animal{ 
-			Dog{
-				Animal: Animal{
-					 Name: "Fido",
-					  IsMammal: true,
-				}, PackFactor: 5,
-			},
-			Cat{
-				Animal: Animal{ 
-					Name: "Milo",
-					IsMammal: true,
+		animals := []Animal{
+				Dog{
+					Animal: Animal{
+						 Name: "Fido",
+						  IsMammal: true,
+					}, PackFactor: 5,
 				},
-			ClimbFactor: 4, },
-	}
-	for _, animal := range animals {
-		 animal.Speak()
-	}
+				Cat{
+					Animal: Animal{
+						Name: "Milo",
+						IsMammal: true,
+					},
+				ClimbFactor: 4, },
+		}
+		for _, animal := range animals {
+			 animal.Speak()
+		}
 	*/
 	t.Log("Embedding isn’t the same as inheritance and this is the pattern I need to stay away from. A Dog is a Dog, a Cat a Cat, and an Animal an Animal")
 }
 
-// define the common method set of behavior 
+// define the common method set of behavior
 type Speaker interface {
 	Speak()
 }
 
 func TestInterface(t *testing.T) {
 	// Can
-	speakers := []Speaker{ 
-			&Dog{
-				Animal: Animal{
-					 Name: "Fido",
-					  IsMammal: true,
-				}, PackFactor: 5,
+	speakers := []Speaker{
+		&Dog{
+			Animal: Animal{
+				Name:     "Fido",
+				IsMammal: true,
+			}, PackFactor: 5,
+		},
+		&Cat{
+			Animal: Animal{
+				Name:     "Milo",
+				IsMammal: true,
 			},
-			&Cat{
-				Animal: Animal{ 
-					Name: "Milo",
-					IsMammal: true,
-				},
-			ClimbFactor: 4, },
+			ClimbFactor: 4},
 	}
 	for _, speaker := range speakers {
-		 speaker.Speak()
+		speaker.Speak()
 	}
 }
+
+// we should be able to use this way, abandon the Animal
+/*
+	type Dog struct {
+		Name       string
+		IsMammal   bool
+		PackFactor int
+	}
+	type Cat struct {
+		Name        string
+		IsMammal    bool
+		ClimbFactor int
+	}
+*/
