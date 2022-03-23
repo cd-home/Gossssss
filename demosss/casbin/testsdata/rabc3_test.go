@@ -31,6 +31,11 @@ func TestMultiRabcCasbin(t *testing.T) {
 	ok, _ = e.Enforce(sub, obj, act)
 	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
 
+	// not in policy data 
+	sub, obj, act = "admin", "data/3", "write"
+	ok, _ = e.Enforce(sub, obj, act)
+	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
+
 	// bob prod can not
 	sub, obj, act = "bob", "data/1", "write"
 	ok, _ = e.Enforce(sub, obj, act)

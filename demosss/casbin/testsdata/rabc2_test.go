@@ -18,6 +18,15 @@ func TestRabcCasbinDeFineKeyFunc(t *testing.T) {
 	ok, _ := e.Enforce(sub, obj, act)
 	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
 
+	sub, obj, act = "admin", "data/1", "read"
+	ok, _ = e.Enforce(sub, obj, act)
+	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
+
+	// mike inherit the admin
+	sub, obj, act = "mike", "data/1", "read"
+	ok, _ = e.Enforce(sub, obj, act)
+	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
+
 	// users
 	sub, obj, act = "alice", "data/1", "read"
 	ok, _ = e.Enforce(sub, obj, act)

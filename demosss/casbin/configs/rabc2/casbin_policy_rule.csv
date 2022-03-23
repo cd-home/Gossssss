@@ -7,3 +7,4 @@ p, alice, data/1, write
 p, developer, data/2, read
 
 g, bob, developer
+g, mike, admin
