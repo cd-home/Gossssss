@@ -5,6 +5,7 @@ import (
 
 	"github.com/casbin/casbin/v2"
 )
+
 // 用户角色
 func TestRabcCasbin(t *testing.T) {
 	e, err := casbin.NewEnforcer("../configs/rabc/casbin_rabc_rule.conf", "../configs/rabc/casbin_policy_rule.csv")
@@ -24,12 +25,24 @@ func TestRabcCasbin(t *testing.T) {
 	ok, _ = e.Enforce(sub, obj, act)
 	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
 
+	sub, obj, act = "admin", "data/2", "write"
+	ok, _ = e.Enforce(sub, obj, act)
+	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
+
 	// users
 	sub, obj, act = "alice", "data/1", "read"
 	ok, _ = e.Enforce(sub, obj, act)
 	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
 
 	sub, obj, act = "alice", "data/1", "write"
+	ok, _ = e.Enforce(sub, obj, act)
+	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
+
+	sub, obj, act = "alice", "data/2", "read"
+	ok, _ = e.Enforce(sub, obj, act)
+	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
+
+	sub, obj, act = "alice", "data/2", "write"
 	ok, _ = e.Enforce(sub, obj, act)
 	t.Logf("sub = %s, obj = %s, act = %s, ok=%v", sub, obj, act, ok)
 

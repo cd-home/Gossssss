@@ -6,6 +6,7 @@ import (
 	"time"
 
 	opentracing "github.com/opentracing/opentracing-go"
+	"github.com/opentracing/opentracing-go/log"
 	"github.com/uber/jaeger-client-go"
 	config "github.com/uber/jaeger-client-go/config"
 )
@@ -32,7 +33,8 @@ func initJaeger(service string) (opentracing.Tracer, io.Closer) {
 
 func TestController(ctx context.Context) {
 	span, _ := opentracing.StartSpanFromContext(ctx, "TestController")
-
+	span.LogFields(log.String("logkey", "logvalue"))
+	span.LogKV("logk", "logv")
 	defer func() {
 		span.SetTag("req", "127.0.0.1")
 		span.Finish()
@@ -50,6 +52,17 @@ func TestService(ctx context.Context) {
 		span.Finish()
 	}()
 	time.Sleep(time.Second)
+	_ctx := opentracing.ContextWithSpan(context.Background(), span)
+	TestRepository(_ctx)
+}
+
+func TestRepository(ctx context.Context) {
+	span, _ := opentracing.StartSpanFromContext(ctx, "TestRepository")
+	defer func() {
+		span.SetTag("target", "TestRepository")
+		span.Finish()
+	}()
+	time.Sleep(time.Second)
 }
 
 func main() {
@@ -64,7 +77,7 @@ func main() {
 }
 
 /*
-docker run -d --name jaeger \                
+docker run -d --name jaeger \
   -e COLLECTOR_ZIPKIN_HOST_PORT=:9411 \
   -p 5775:5775/udp \
   -p 6831:6831/udp \
