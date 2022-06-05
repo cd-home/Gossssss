@@ -1,8 +1,9 @@
-package main
+package reflect
 
 import (
 	"fmt"
 	"reflect"
+	"testing"
 )
 
 type User struct {
@@ -18,7 +19,7 @@ func (u User) SayHi(msg string) {
 	fmt.Printf("%s, I am %s\n", msg, u.Name)
 }
 
-func main() {
+func TestReflectCall(tt *testing.T) {
 	user := User{Name: "GodYao", Age: 27}
 
 	object := reflect.ValueOf(&user)
