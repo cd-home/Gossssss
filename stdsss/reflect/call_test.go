@@ -34,7 +34,7 @@ func TestReflectCall(tt *testing.T) {
 		fmt.Printf("%d %s = %v \n", i, field.Type(), field.Interface())
 	}
 
-	//
+	// Call Methods By MethodName
 	Invoke(&user, "SayHello")
 	Invoke(&user, "SayHi", "Hi")
 }
