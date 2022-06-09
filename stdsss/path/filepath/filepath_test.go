@@ -63,6 +63,7 @@ func TestJoinpath(t *testing.T) {
 }
 
 func TestPathMatch(t *testing.T) {
+	// Match reports whether name matches the shell file name pattern
 	// ? singel char
 	t.Log(filepath.Match("/a/b/?", "/a/b/c"))
 	t.Log(filepath.Match("/a/b/?", "/a/b/cc"))
