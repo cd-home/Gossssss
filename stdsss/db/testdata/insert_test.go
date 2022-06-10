@@ -18,7 +18,7 @@ func TestInsert(t *testing.T) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	// 非返回rows ，一律使用Exec
+	// 非返回rows ，一律使用Exec, 并且Exec 不需要显式的Close
 	result, err := db.Exec(`INSERT INTO user(name) VALUES("jack"), ("mary"), ("bob")`)
 	if err != nil {
 		t.Fatal(err)
