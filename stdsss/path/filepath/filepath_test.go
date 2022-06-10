@@ -1,6 +1,7 @@
 package tests
 
 import (
+	"io/fs"
 	"path/filepath"
 	"testing"
 )
@@ -84,9 +85,93 @@ func TestPathMatch(t *testing.T) {
 	t.Log(filepath.Match("a/b/[1-9]?", "a/b/1"))
 	t.Log(filepath.Match("a/b/[1-9]*", "a/b/12"))
 
-	// Not 
+	// Not
 	t.Log(filepath.Match("a/b/[^a]", "a/b/a"))
 	t.Log(filepath.Match("a/b/[^a]", "a/b/c"))
+}
 
-	
+func TestRelativePath(t *testing.T) {
+	// 返回基于 Base 的 相对路径
+	tests := []string{"/a/b/c", "/b/c", "./b/c", "../b/c"}
+	base := "/a"
+	for _, path := range tests {
+		t.Run(path, func(tt *testing.T) {
+			rel, err := filepath.Rel(base, path)
+			tt.Log(rel, err)
+		})
+	}
+}
+
+func TestSplitPath(t *testing.T) {
+	// Split Dir and File == > in fact split last slash
+	// Split splits path immediately following the final Separator,
+	// separating it into a directory and file name component.
+	// If there is no Separator in path, Split returns an empty dir
+	// and file set to path.
+	// The returned values have the property that path = dir+file.
+	tests := []string{"/a/b/c.go", "a/b/c/d", "a/b/c//d"}
+	for _, test := range tests {
+		t.Run(test, func(tt *testing.T) {
+			tt.Log(filepath.Split(test))
+		})
+	}
+}
+
+func TestSplitListPath(t *testing.T) {
+	// SplitList splits a list of paths joined by the OS-specific ListSeparator,
+	// usually found in PATH or GOPATH environment variables.
+	// 通常是来分割 环境变量
+	test := "a/b/c:/d/e/f"
+	t.Log(filepath.SplitList(test))
+}
+
+func TestToSlashPath(t *testing.T) {
+	// 不知道咋用
+	// ToSlash returns the result of replacing each separator character
+	// in path with a slash ('/') character. Multiple separators are
+	// replaced by multiple slashes.
+	test := "a/b/c"
+	t.Log(filepath.ToSlash(test))
+}
+
+func TestVolumeNamePath(t *testing.T) {
+	// 不知道咋用
+	// VolumeName returns leading volume name.
+	// Given "C:\foo\bar" it returns "C:" on Windows.
+	// Given "\\host\share\foo" it returns "\\host\share".
+	// On other platforms it returns "".
+	tests := []string{"/a/b/c", "C:/a/b/c", `\\home\share`}
+	for _, test := range tests {
+		t.Run(test, func(tt *testing.T) {
+			tt.Log(filepath.VolumeName(test))
+		})
+	}
+}
+
+func TestWalkPath(t *testing.T) {
+	// 遍历目录
+	test := "/Users/admin/Documents/otherSpace/Gossssss/stdsss"
+	filepath.Walk(test, func(path string, info fs.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		if !info.IsDir() {
+			t.Log(info.Name())
+		}
+		return nil
+	})
+}
+
+func TestWalkDirPath(t *testing.T) {
+	// Better than Walk
+	// Walk is less efficient than WalkDir, introduced in Go 1.16,
+	// which avoids calling os.Lstat on every visited file or directory.
+	test := "/Users/admin/Documents/otherSpace/Gossssss/stdsss"
+	filepath.WalkDir(test, func(path string, d fs.DirEntry, err error) error {
+		if err != nil {
+			return err
+		}
+		t.Log(d.Name())
+		return nil
+	})
 }
