@@ -12,5 +12,16 @@ func TestChannel(t *testing.T) {
 		time.Sleep(time.Second)
 		ch <- true
 	}()
-	t.Log(<-ch) 
+	t.Log(<-ch)
+}
+
+func TestNoCacheChannel(t *testing.T) {
+	ch := make(chan int)
+	go func() {
+		ch <- 1
+		close(ch)
+	}()
+	for v := range ch {
+		t.Log(v)
+	}
 }
