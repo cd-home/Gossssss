@@ -23,7 +23,23 @@ func WaitForAllGroutines() {
 	wg.Wait()
 }
 
+type SafeMap struct {
+	sync.Mutex
+	m map[string]string
+}
+
+func (m SafeMap) Set(key string, value string) {
+	defer m.Unlock()
+	m.Lock()
+	m.m[key] = value
+}
 
 func main() {
+	sm := &SafeMap{m: make(map[string]string)}
+	for i := 0; i < 10; i++ {
+		go func(i int) {
+			sm.Set(string(i), string(i))
+		}(i)
+	}
 	WaitForAllGroutines()
 }

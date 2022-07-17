@@ -31,6 +31,9 @@ func TestAligin(t *testing.T) {
 		flag2:   true,
 		pi:      3.145,
 	}
+
+	t.Log(unsafe.Alignof(e.flag))
+
 	d := unsafe.Alignof(e)
 	t.Log(d)
 	t.Log(unsafe.Sizeof(e))

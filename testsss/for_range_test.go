@@ -1,7 +1,9 @@
 package testsss
 
 import (
+	"fmt"
 	"testing"
+	"time"
 )
 
 func TestForRangeCopyValue(t *testing.T) {
@@ -29,5 +31,56 @@ func TestTemporaryPointer(t *testing.T) {
 	// v is a value copy
 	for _, v := range store {
 		t.Log(*v)
+	}
+}
+
+func TestForRangeChannel(t *testing.T) {
+	ch := make(chan int, 3)
+	go func() {
+		for i := 0; i < 5; i++ {
+			ch <- i
+		}
+		// close(ch)
+	}()
+	v, ok := <-ch
+	t.Log(v, ok)
+	v, ok = <-ch
+	t.Log(v, ok)
+	v, ok = <-ch
+	t.Log(v, ok)
+	v, ok = <-ch
+	t.Log(v, ok)
+	v, ok = <-ch
+	t.Log(v, ok)
+	v, ok = <-ch
+	t.Log(v, ok)
+}
+
+func TestSelectChannel(t *testing.T) {
+	ch := make(chan int)
+	quit := make(chan bool)
+	// 写
+	go func() {
+		for i := 0; i < 5; i++ {
+			ch <- i
+			time.Sleep(time.Second * 2)
+		}
+		close(ch)    // 发送完成关闭channel
+		quit <- true // 结束
+	}()
+	// 读
+	for {
+		// 监听channel数据
+		select {
+		case data := <-ch:
+			fmt.Println(data)
+		case <-quit:
+			// 只能跳出select
+			// break
+			return
+		default:
+			fmt.Println("wait data")
+			time.Sleep(time.Second)
+		}
 	}
 }
