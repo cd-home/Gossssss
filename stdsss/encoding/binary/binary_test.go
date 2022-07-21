@@ -41,7 +41,7 @@ func TestBinary(t *testing.T) {
 
 	// 类型尺寸
 	head := make([]byte, 5)
-
+	// 这个地方只是借用一下了buf, 实际上这可以是已经传输的conn对象
 	io.ReadFull(buf, head)
 	buf2 := bytes.NewBuffer(head)
 
