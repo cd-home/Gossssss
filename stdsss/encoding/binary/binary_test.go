@@ -24,6 +24,7 @@ func TestBinary(t *testing.T) {
 
 	arr := []uint8{3, 4}
 	binary.Write(buf, binary.LittleEndian, arr)
+	arrn := binary.Size(arr)
 
 	type user struct {
 		Name string `json:"name"`
@@ -62,7 +63,7 @@ func TestBinary(t *testing.T) {
 	// io.ReadFull(buf, ends)
 	// fmt.Println(string(ends))
 
-	a := make([]byte, 2)
+	a := make([]byte, arrn)
 	io.ReadFull(buf, a)
 	fmt.Println(a)
 	fmt.Printf("%T\n", a)
