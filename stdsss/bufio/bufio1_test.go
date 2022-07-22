@@ -1,4 +1,4 @@
-package main
+package bufio_test
 
 import (
 	"bufio"
@@ -7,9 +7,10 @@ import (
 	"io"
 	"os"
 	"regexp"
+	"testing"
 )
 
-func main() {
+func TestInputStream(t *testing.T) {
 	flag.Parse()
 	if len(flag.Args()) == 0 {
 		return
@@ -49,7 +50,7 @@ func ReadeFileByline(path string) error {
 			fmt.Printf("error read")
 			break
 		}
-		fmt.Printf(line)
+		fmt.Println(line)
 	}
 	return nil
 }
@@ -70,7 +71,7 @@ func ReadFileByWord(path string) error {
 			fmt.Printf("error")
 			return err
 		}
-		r := regexp.MustCompile("[^\\s]+")
+		r := regexp.MustCompile(`[^\\s]+`)
 		words := r.FindAllString(line, -1)
 		for i := 0; i < len(words); i++ {
 			fmt.Println(words[i])
@@ -115,4 +116,3 @@ func ReadSize(f *os.File, size int) []byte {
 	}
 	return buf[0:n]
 }
-
