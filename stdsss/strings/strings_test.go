@@ -1,8 +1,9 @@
-package main
+package strings_test
 
 import (
-	"strings"
 	"fmt"
+	"strings"
+	"testing"
 )
 
 func ReverseString(s string) string {
@@ -15,7 +16,7 @@ func ReverseString(s string) string {
 	return res
 }
 
-func main() {
+func TestString(t *testing.T) {
 	s := "我你他"
 	fmt.Println(ReverseString(s))
 }
