@@ -6,6 +6,9 @@ import (
 	"net/rpc"
 )
 
+// RPC: Remote Procedure Call
+// Using TCP/IP
+
 type Greeter struct{}
 
 // 严格符合这种格式的方法，就可以对外提供服务
