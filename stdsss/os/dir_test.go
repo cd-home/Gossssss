@@ -7,8 +7,10 @@ import (
 )
 
 func TestDir(t *testing.T) {
-	// 创建删除文件夹
+	// 创建
 	os.Mkdir("dir", 0777)
+
+	// 递归
 	os.MkdirAll("dir/sub", 0777)
 	os.MkdirAll("dir/sub2", 0777)
 

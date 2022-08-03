@@ -1,4 +1,5 @@
-FROM golang:alpine AS Builder
+ARG v
+FROM golang:${v} AS Builder
 LABEL stage=Build
 WORKDIR /app/build/
 COPY . .
