@@ -23,3 +23,12 @@ func TestPaddingZero(t *testing.T) {
 
 	// %d == int
 }
+
+func TestPrintf(t *testing.T) {
+	fmt.Printf("Hello, world!")
+}
+
+func TestSprintf(t *testing.T) {
+	s := fmt.Sprintf("Hello, %s", "Yao")
+	t.Log(s)
+}
