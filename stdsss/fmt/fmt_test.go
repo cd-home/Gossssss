@@ -25,6 +25,7 @@ func TestPaddingZero(t *testing.T) {
 }
 
 func TestPrintf(t *testing.T) {
+	// write to *os.file
 	fmt.Printf("Hello, world!")
 }
 
