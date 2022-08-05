@@ -10,6 +10,7 @@ import (
 func TestCsvReader(t *testing.T) {
 	path := "test.csv"
 	f, _ := os.Open(path)
+	defer f.Close()
 	csvReader := csv.NewReader(f)
 	for {
 		record, err := csvReader.Read()
@@ -23,6 +24,7 @@ func TestCsvReader(t *testing.T) {
 func TestCsvWriter(t *testing.T) {
 	target := "target.csv"
 	f, _ := os.OpenFile(target, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	defer f.Close()
 	csvWriter := csv.NewWriter(f)
 	records := [][]string{
 		{"Bob", "001", "002", "003", "004", "005", "006"},
