@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-node
+  name: nginx-deploy
   labels:
-    app: hello-node
+    app: nginx
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hello-node
+      app: nginx
   template:
     metadata:
       labels:
-        app: hello-node
+        app: nginx
     spec:
       containers:
-      - name: hello-node
-        image: hello-node
+      - name: nginx-c
+        image: nginx:latest
         imagePullPolicy: IfNotPresent
         ports:
-        - containerPort: 8999
+        - containerPort: 80
