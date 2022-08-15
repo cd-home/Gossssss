@@ -19,10 +19,10 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the proto package it is being compiled against.
+// is compatible with the proto packages it is being compiled against.
 // A compilation error at this line likely means your copy of the
-// proto package needs to be updated.
-const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
+// proto packages needs to be updated.
+const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto packages
 
 type HelloRequest struct {
 	Name                 string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
@@ -127,7 +127,7 @@ var _ context.Context
 var _ grpc.ClientConn
 
 // This is a compile-time assertion to ensure that this generated file
-// is compatible with the grpc package it is being compiled against.
+// is compatible with the grpc packages it is being compiled against.
 const _ = grpc.SupportPackageIsVersion4
 
 // HelloServiceClient is the client API for HelloService service.
