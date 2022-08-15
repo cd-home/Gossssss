@@ -26,8 +26,8 @@ func (g *Greeter) GetUpperName(ctx context.Context, req *pb.HelloRequest) (*pb.H
 }
 
 func main() {
-	// tcp
-	listener, _ := net.Listen("tcp", "127.0.0.1:8081")
+	// tcpdemo
+	listener, _ := net.Listen("tcpdemo", "127.0.0.1:8081")
 
 	// 创建服务
 	srv := grpc.NewServer()
