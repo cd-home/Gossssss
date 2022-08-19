@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestStringsbuilder(t *testing.T) {
+func TestStringsBuilder(t *testing.T) {
 	var buf strings.Builder
 	buf.Grow(10)
 	buf.WriteString("hello world")
