@@ -76,14 +76,19 @@ func UploadBigFile(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
+
 // UploadFile small file upload
 func UploadFile(writer http.ResponseWriter, request *http.Request) {
 	f, header, _ := request.FormFile("upload")
 	defer f.Close()
 	fileName := time.Now().Format("20060102150405_") + header.Filename
 	dst, _ := os.Create(fileName)
+	fmt.Printf("%T", dst)
 	defer dst.Close()
-	_, _ = io.Copy(dst, f)
+	_, err := io.Copy(dst, f)
+	if err != nil {
+		fmt.Println(err)
+	}
 	_, _ = fmt.Fprint(writer, fileName)
 }
 
@@ -106,6 +111,11 @@ func UploadFiles(writer http.ResponseWriter, request *http.Request) {
 func Download(w http.ResponseWriter, r *http.Request) {
 	file, _ := os.Open("name.txt")
 	defer file.Close()
-	w.Header().Set("Content-Disposition", `attachment; filename=`+ file.Name())
+	w.Header().Set("Content-Disposition", `attachment; filename=`+file.Name())
 	io.Copy(w, file)
+}
+
+func FileUpAndDownServer() {
+	http.HandleFunc("/upload", UploadFile)
+	http.ListenAndServe(":8080", nil)
 }
