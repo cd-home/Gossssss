@@ -1,7 +1,7 @@
 package main
 
 import (
-	build "Gossssss/stdsss/cmd/build"
+	"Gossssss/go.dev/stdlib/cmd/build"
 	"fmt"
 )
 
