@@ -83,16 +83,12 @@ func UploadFile(writer http.ResponseWriter, request *http.Request) {
 	defer f.Close()
 	fileName := time.Now().Format("20060102150405_") + header.Filename
 	dst, _ := os.Create(fileName)
-	fmt.Printf("%T", dst)
 	defer dst.Close()
-	_, err := io.Copy(dst, f)
-	if err != nil {
-		fmt.Println(err)
-	}
+	_, _ = io.Copy(dst, f)
 	_, _ = fmt.Fprint(writer, fileName)
 }
 
-// UploadFile small files upload
+// UploadFiles files
 func UploadFiles(writer http.ResponseWriter, request *http.Request) {
 	_ = request.ParseMultipartForm(32 << 20)
 	files := request.MultipartForm.File["upload"]
@@ -102,7 +98,7 @@ func UploadFiles(writer http.ResponseWriter, request *http.Request) {
 		src, _ := files[i].Open()
 		dst, _ := os.Create(fileName)
 		_, _ = io.Copy(dst, src)
-		//src.Close()
+		src.Close()
 	}
 	_, _ = fmt.Fprint(writer, files)
 }
