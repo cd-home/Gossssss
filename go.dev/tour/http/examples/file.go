@@ -79,6 +79,27 @@ func UploadBigFile(w http.ResponseWriter, r *http.Request) {
 
 // UploadFile small file upload
 func UploadFile(writer http.ResponseWriter, request *http.Request) {
+	// Form-Data Body Fields
+	//request.ParseForm()
+	//request.PostForm.Get()
+
+	// Not include URL
+	//request.PostFormValue()
+
+	// URL AND Form-Data Body
+	//request.ParseForm()
+	//request.Form.Get()
+
+	// Use this OK !
+	//request.FormValue()
+	val := request.FormValue("name")
+	fmt.Println(val)
+
+	// One
+	//request.ParseMultipartForm()
+	//request.MultipartForm.File[""]
+
+	// Two
 	f, header, _ := request.FormFile("upload")
 	defer f.Close()
 	fileName := time.Now().Format("20060102150405_") + header.Filename
