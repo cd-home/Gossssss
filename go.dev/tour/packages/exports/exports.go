@@ -13,7 +13,7 @@ package exports
 
 var ExportVar = "Export Var"
 
-var UnExportVar = "UnExport Var By Getter Func To Export"
+var unExportVar = "unExport Var By Getter Func To Export"
 
 const ExportConst = "ExportConst"
 
@@ -25,7 +25,7 @@ type ExportStruct struct {
 }
 
 // ExportFunc
-// Maybe Some Name Can Not Exported, But User 'Getter' Func To Export
+// Maybe Some Name Can Not Be Exported, But User 'Getter' Func To Export
 func ExportFunc() string {
-	return UnExportVar
+	return unExportVar
 }
