@@ -41,7 +41,7 @@ func main() {
 	// select blocked
 	cjs := make(chan int, 1)
 	go func() {
-		time.Sleep(time.Second * 10)
+		time.Sleep(time.Second * 3)
 		cjs <- 1
 		close(cjs)
 	}()
@@ -49,4 +49,28 @@ func main() {
 	case v := <-cjs:
 		fmt.Println(v)
 	}
+
+	selectDefaultMode := func(done chan struct{}) {
+		tick := time.Tick(time.Second * 2)
+		after := time.After(time.Second * 4)
+		go func() {
+			for {
+				select {
+				case <-done:
+					fmt.Println("exit.")
+					return
+				case t := <-tick:
+					fmt.Println(t)
+				case v := <-after:
+					fmt.Println(v)
+				}
+			}
+		}()
+	}
+	// select default
+	kip := make(chan struct{})
+	selectDefaultMode(kip)
+
+	time.Sleep(time.Second * 8)
+	close(kip)
 }

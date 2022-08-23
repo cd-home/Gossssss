@@ -11,7 +11,7 @@ var DeclaresVariable string
 // Declaration And Initializers
 var SingleGlobalVar string = "Hello World"
 
-// Type Assets
+// Type Assets Meantime Diff Type
 var a, b, c = 10, 20, true
 
 // Group
