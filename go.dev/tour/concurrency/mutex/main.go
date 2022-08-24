@@ -25,7 +25,7 @@ func (sc *SafeCounter) Value(key string) int {
 
 func main() {
 	var wg sync.WaitGroup
-	sc := SafeCounter{v: make(map[string]int)}
+	sc := &SafeCounter{v: make(map[string]int)}
 	for i := 0; i < 1000; i++ {
 		wg.Add(1)
 		go sc.Inc(&wg, "oneKey")
