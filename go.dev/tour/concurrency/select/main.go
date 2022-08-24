@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-func main() {
+func Select() {
 	Fibonacci := func(exit chan struct{}) <-chan int {
 		ch := make(chan int)
 		x, y := 0, 1
@@ -37,7 +37,9 @@ func main() {
 	// receiver 10 times and close
 	close(exit)
 	time.Sleep(time.Second)
+}
 
+func BlockSelect() {
 	// select blocked
 	cjs := make(chan int, 1)
 	go func() {
@@ -49,7 +51,9 @@ func main() {
 	case v := <-cjs:
 		fmt.Println(v)
 	}
+}
 
+func SelectDefault() {
 	selectDefaultMode := func(done chan struct{}) {
 		tick := time.Tick(time.Second * 2)
 		after := time.After(time.Second * 4)
@@ -57,12 +61,15 @@ func main() {
 			for {
 				select {
 				case <-done:
-					fmt.Println("exit.")
+					fmt.Println("SelectDefault exit.")
 					return
 				case t := <-tick:
 					fmt.Println(t)
 				case v := <-after:
 					fmt.Println(v)
+				default:
+					fmt.Println("default....")
+					time.Sleep(500 * time.Millisecond)
 				}
 			}
 		}()
@@ -73,4 +80,11 @@ func main() {
 
 	time.Sleep(time.Second * 8)
 	close(kip)
+}
+
+func main() {
+	Select()
+	BlockSelect()
+	SelectDefault()
+	time.Sleep(2 * time.Second)
 }
