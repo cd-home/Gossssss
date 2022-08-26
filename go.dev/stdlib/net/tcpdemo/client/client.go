@@ -20,17 +20,17 @@ func NewClient(addr string, port uint) *Client {
 }
 
 func (c *Client) Send() {
-	addr, err := net.ResolveTCPAddr("tcpdemo", fmt.Sprintf("%s:%d", c.Addr, c.Port))
+	addr, err := net.ResolveTCPAddr("tcp", fmt.Sprintf("%s:%d", c.Addr, c.Port))
 	if err != nil {
 		log.Fatal(err)
 	}
 	for {
-		conn, err := net.DialTCP("tcpdemo", nil, addr)
+		conn, err := net.DialTCP("tcp", nil, addr)
 		if err != nil {
 			log.Fatal(err)
 			return
 		}
-		_, err = conn.Write([]byte("Hello cobar!"))
+		_, err = conn.Write([]byte("Hello Tcp!"))
 		if err != nil {
 			log.Println(err)
 			return

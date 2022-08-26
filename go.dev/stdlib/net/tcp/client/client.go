@@ -4,19 +4,25 @@ import (
 	"bytes"
 	"encoding/binary"
 	"fmt"
+	"log"
 	"net"
 )
 
 func main() {
-	tcpAddr, err := net.ResolveTCPAddr("tcpdemo", "127.0.0.1:8080")
+	tcpAddr, err := net.ResolveTCPAddr("tcp", "127.0.0.1:8080")
 	if err != nil {
 		panic(err)
 	}
-	tcpConn, err := net.DialTCP("tcpdemo", nil, tcpAddr)
+	tcpConn, err := net.DialTCP("tcp", nil, tcpAddr)
 	if err != nil {
 		panic(err)
 	}
-	defer tcpConn.Close()
+	defer func(tcpConn *net.TCPConn) {
+		err := tcpConn.Close()
+		if err != nil {
+			log.Println(err)
+		}
+	}(tcpConn)
 	// tcpConn.SetKeepAlive(true)
 	buf := new(bytes.Buffer)
 	for i := 1; i < 6; i++ {

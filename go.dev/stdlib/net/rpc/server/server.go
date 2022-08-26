@@ -11,6 +11,7 @@ import (
 
 type Greeter struct{}
 
+// Hello
 // 严格符合这种格式的方法，就可以对外提供服务
 func (g *Greeter) Hello(req string, resp *string) error {
 	*resp = "Hello, " + req
@@ -22,8 +23,8 @@ func main() {
 	_ = rpc.Register(&Greeter{})
 
 	// 监听地址，提供服务
-	addr, _ := net.ResolveTCPAddr("tcpdemo", ":8081")
-	listener, _ := net.ListenTCP("tcpdemo", addr)
+	addr, _ := net.ResolveTCPAddr("tcp", ":8081")
+	listener, _ := net.ListenTCP("tcp", addr)
 
 	for {
 		conn, e := listener.AcceptTCP()

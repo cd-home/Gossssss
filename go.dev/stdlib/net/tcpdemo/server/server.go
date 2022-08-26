@@ -23,7 +23,7 @@ type Server struct {
 func NewServer(name string) TcpServerFace {
 	return &Server{
 		Name:       name,
-		TCPVersion: "tcpdemo",
+		TCPVersion: "tcp",
 		IP:         "127.0.0.1",
 		Port:       8080,
 	}

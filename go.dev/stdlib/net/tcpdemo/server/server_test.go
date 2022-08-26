@@ -6,6 +6,6 @@ import (
 )
 
 func TestTcp(t *testing.T) {
-	conn, _ := net.Dial("tcpdemo", "localhost")
+	conn, _ := net.Dial("tcp", "localhost")
 	conn.Close()
 }

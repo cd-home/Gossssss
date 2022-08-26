@@ -10,11 +10,11 @@ import (
 
 func main() {
 	// ResolveTCPAddr 主要是验证协议、地址、端口是否正确
-	tcpAddr, err := net.ResolveTCPAddr("tcpdemo", "127.0.0.1:8080")
+	tcpAddr, err := net.ResolveTCPAddr("tcp", "127.0.0.1:8080")
 	if err != nil {
 		panic(err)
 	}
-	tcpListener, err := net.ListenTCP("tcpdemo", tcpAddr)
+	tcpListener, err := net.ListenTCP("tcp", tcpAddr)
 
 	if err != nil {
 		panic(err)
