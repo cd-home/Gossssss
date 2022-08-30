@@ -13,6 +13,8 @@ func Say(s string) {
 }
 
 func main() {
+	// A goroutine is a lightweight thread managed by the Go runtime.
+	// access to shared memory must be synchronized
 	go Say("Hello")
 	Say("World")
 }
