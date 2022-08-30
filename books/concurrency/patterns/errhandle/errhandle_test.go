@@ -1,4 +1,4 @@
-package patterns_test
+package errhandle_test
 
 import (
 	"fmt"

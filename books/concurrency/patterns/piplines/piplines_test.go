@@ -1,4 +1,4 @@
-package patterns_test
+package piplines_test
 
 import (
 	"fmt"

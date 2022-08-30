@@ -1,4 +1,4 @@
-package patterns_test
+package orchannel_test
 
 import (
 	"fmt"

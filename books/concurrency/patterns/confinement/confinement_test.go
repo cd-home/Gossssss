@@ -1,4 +1,4 @@
-package patterns_test
+package confinement_test
 
 import (
 	"bytes"

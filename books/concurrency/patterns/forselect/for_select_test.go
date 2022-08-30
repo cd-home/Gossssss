@@ -1,4 +1,4 @@
-package patterns_test
+package forselect_test
 
 import (
 	"context"

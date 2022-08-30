@@ -1,4 +1,4 @@
-package patterns_test
+package preventleak_test
 
 import (
 	"fmt"
