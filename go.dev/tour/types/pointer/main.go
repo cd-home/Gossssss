@@ -10,12 +10,14 @@ func main() {
 
 	// The & operator generates a pointer to its operand.
 	// operand: variable
+	// 获取地址
 	p = &i
 
-	// The * operator denotes the pointer's underlying value.
+	// The * operator denotes the pointer's underlying value [底层值].
+	// 解引用、间接引用
 	fmt.Println(*p)
 
-	//
+	// 修改值
 	*p = 99
 	fmt.Println(i)
 }
