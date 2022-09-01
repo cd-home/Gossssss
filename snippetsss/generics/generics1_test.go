@@ -35,6 +35,10 @@ func Add[T Number](a, b T) T {
 }
 
 func TestGenericsAdd(t *testing.T) {
-	t.Log(Add[int64](1, 2))
+	// we know 1 2 type
+	s1 := []int64{1, 2}
+	t.Log(Add(s1[0], s1[1]))
+
+	// 1.2 2.1 Must be float64
 	t.Log(Add[float64](1.2, 2.1))
 }
