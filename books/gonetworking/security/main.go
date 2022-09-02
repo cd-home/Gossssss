@@ -1,1 +1,5 @@
-package security
+package main
+
+func main() {
+
+}

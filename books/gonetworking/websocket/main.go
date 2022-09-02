@@ -1,1 +1,5 @@
-package websocket
+package main
+
+func main() {
+
+}

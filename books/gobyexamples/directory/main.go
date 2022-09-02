@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 )
@@ -26,17 +25,17 @@ func main() {
 	err = os.MkdirAll("p/c/file", 0755)
 	CheckErr(err)
 
-	c, err := ioutil.ReadDir("p")
+	c, err := os.ReadDir("p")
 	CheckErr(err)
 	for _, entry := range c {
-		fmt.Println(entry.Name(), entry.IsDir(), entry.Mode())
+		fmt.Println(entry.Name(), entry.IsDir(), entry.Type())
 	}
 
 	os.Chdir("./Go Code Style")
-	c, err = ioutil.ReadDir(".")
+	c, err = os.ReadDir(".")
 	CheckErr(err)
 	for _, entry := range c {
-		fmt.Println(entry.Name(), entry.IsDir(), entry.Mode())
+		fmt.Println(entry.Name(), entry.IsDir(), entry.Type())
 	}
 
 	filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
