@@ -1,4 +1,4 @@
-package main
+package tests
 
 import (
 	"fmt"
@@ -19,8 +19,8 @@ func TestIntMinBasic(t *testing.T) {
 	}
 }
 
-func TestIntMinTableDriven(t *testing.T)  {
-	tests := []struct{
+func TestIntMinTableDriven(t *testing.T) {
+	tests := []struct {
 		a, b int
 		want int
 	}{

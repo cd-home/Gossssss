@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-func CheckErr(e error)  {
+func CheckErr(e error) {
 	defer func() {
 		if err := recover(); err != nil {
 			fmt.Println(err)
@@ -15,6 +15,8 @@ func CheckErr(e error)  {
 	}()
 	panic(e)
 }
+
+// directory
 
 func main() {
 	err := os.Mkdir("p", 0755)
