@@ -5,6 +5,7 @@ import (
 	"math"
 )
 
+// 函数是一种类型, 是值, 可以作为参数传递、返回值、可赋值给变量
 // Function values
 // Functions are values too. They can be passed around just like other values.
 // Function values may be used as function arguments and return values.

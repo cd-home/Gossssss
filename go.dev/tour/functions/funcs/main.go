@@ -33,6 +33,15 @@ func NamedReturnValue(x, y int) (sum int) {
 	return
 }
 
+// VariableLengthParameter
+// 可变长的参数, 可参考内置函数 append()
+func VariableLengthParameter(start int, data ...int) {
+	for _, d := range data {
+		start += d
+	}
+	fmt.Println(start)
+}
+
 func main() {
 	// Call Func
 	str, num, e := Foo("a", "b", 1, 2)
@@ -51,4 +60,7 @@ func main() {
 
 	sums = NamedReturnValue(4, 9)
 	fmt.Println(sums)
+
+	data := []int{2, 3, 4}
+	VariableLengthParameter(2, data...)
 }
