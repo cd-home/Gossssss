@@ -1,6 +1,4 @@
-package snippetsss
-
-import "testing"
+package options
 
 type Server struct {
 	Pprof bool
@@ -17,7 +15,6 @@ func (f OptionFunc) apply(s *Server) {
 	f(s)
 }
 
-// Default true
 func AddPprof() Option {
 	return WithPprof(true)
 }
@@ -41,8 +38,8 @@ func NewServer(opts ...Option) (*Server, error) {
 }
 
 func (s *Server) clone() *Server {
-	copy := *s
-	return &copy
+	_copy := *s
+	return &_copy
 }
 
 func (s *Server) WithOptions(opts ...Option) (*Server, error) {
@@ -51,12 +48,4 @@ func (s *Server) WithOptions(opts ...Option) (*Server, error) {
 		opt.apply(c)
 	}
 	return c, nil
-}
-
-func TestOptionMode(t *testing.T) {
-	server, _ := NewServer(AddPprof())
-	t.Log(server.Pprof)
-
-	server, _ = server.WithOptions(WithDebug(true))
-	t.Log(server.Debug)
 }
