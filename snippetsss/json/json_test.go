@@ -1,4 +1,4 @@
-package snippetsss
+package json
 
 import (
 	"bytes"

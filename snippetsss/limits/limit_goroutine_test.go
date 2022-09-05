@@ -1,4 +1,4 @@
-package snippetsss
+package limits
 
 import (
 	"fmt"

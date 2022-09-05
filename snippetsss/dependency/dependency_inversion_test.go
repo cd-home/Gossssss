@@ -1,9 +1,8 @@
-package snippetsss
-
+package dependency
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 type ICar interface {
@@ -36,12 +35,10 @@ func TestDependencyInversion(t *testing.T) {
 	bmw := &Car{Type: "bmm"}
 	jack.DriverCar(bmw)
 
-	ft := &Car{Type:"ft"}
+	ft := &Car{Type: "ft"}
 	jack.DriverCar(ft)
 
-
 	mike := Driver{Name: "mike"}
-	benz := &Car{Type:"benz"}
+	benz := &Car{Type: "benz"}
 	mike.DriverCar(benz)
 }
-

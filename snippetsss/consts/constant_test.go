@@ -1,4 +1,4 @@
-package snippetsss
+package consts
 
 import (
 	"testing"
@@ -15,7 +15,6 @@ const (
 
 const FormatTime1 = "2006-01-02 15:04:05"
 const FormatTime2 = "2006/01/02 15:04:05"
-
 
 const (
 	// DebugLevel logs are typically voluminous, and are usually disabled in
@@ -40,7 +39,6 @@ const (
 	// _minLevel = DebugLevel
 	// _maxLevel = FatalLevel
 )
-
 
 func TestIota(t *testing.T) {
 	t.Log(KB)

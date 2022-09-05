@@ -1,4 +1,4 @@
-package snippetsss
+package workers
 
 import (
 	"context"
@@ -10,13 +10,11 @@ import (
 const Running = 1
 const STOPPED = 0
 
-// Task
 type Task struct {
 	Handler func(...interface{})
 	Params  []interface{}
 }
 
-// Pool interface
 type FacePool interface {
 	Run()
 	Put(*Task) error
@@ -24,7 +22,6 @@ type FacePool interface {
 	TimeWaitDone(context.Context)
 }
 
-// goroutine Pool
 type Pool struct {
 	Cap          int64 // g的数量
 	RunningWorks int64
@@ -34,7 +31,6 @@ type Pool struct {
 	PanicFunc    func(interface{})
 }
 
-// NewPool
 func NewPool(workers int64, tasks int) FacePool {
 	return &Pool{
 		Cap:          workers,
@@ -47,7 +43,6 @@ func NewPool(workers int64, tasks int) FacePool {
 	}
 }
 
-// Run
 func (p *Pool) Run() {
 
 	p.IncRunningWorks()
@@ -76,7 +71,6 @@ func (p *Pool) Run() {
 	}()
 }
 
-// Put
 var ErrClosePool = errors.New("pool Stopped")
 
 func (p *Pool) Put(task *Task) error {
@@ -91,7 +85,6 @@ func (p *Pool) Put(task *Task) error {
 	return nil
 }
 
-// Close
 func (p *Pool) Close() {
 	p.State = STOPPED
 	for len(p.TaskC) > 0 {
@@ -100,7 +93,6 @@ func (p *Pool) Close() {
 	close(p.TaskC)
 }
 
-// WaitDone
 func (p *Pool) TimeWaitDone(ctx context.Context) {
 	// 超时
 	for range ctx.Done() {
