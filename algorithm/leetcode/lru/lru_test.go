@@ -1,4 +1,4 @@
-package algssss
+package lru
 
 import (
 	"container/list"
@@ -10,20 +10,20 @@ type CacheNode struct {
 }
 
 func (node *CacheNode) NewCacheNode(k, v interface{}) *CacheNode {
-	return &CacheNode{Key:k, Value:v}
+	return &CacheNode{Key: k, Value: v}
 }
 
 type LRUCache struct {
-	Cap int
+	Cap        int
 	doubleList *list.List
-	CacheMap map[interface{}]*list.Element
+	CacheMap   map[interface{}]*list.Element
 }
 
 func NewLRUCache(cap int) *LRUCache {
 	return &LRUCache{
-		Cap:cap,
-		doubleList:list.New(),
-		CacheMap: make(map[interface{}]*list.Element),
+		Cap:        cap,
+		doubleList: list.New(),
+		CacheMap:   make(map[interface{}]*list.Element),
 	}
 }
 

@@ -1,4 +1,4 @@
-package algssss
+package main
 
 type Stacker interface {
 	Push(item interface{})
@@ -10,13 +10,13 @@ type Stacker interface {
 
 type Stack struct {
 	data []interface{}
-	top int
+	top  int
 }
 
 func NewStack(size int) *Stack {
 	return &Stack{
 		data: make([]interface{}, 0, size),
-		top: -1,
+		top:  -1,
 	}
 }
 
@@ -26,7 +26,7 @@ func (stack *Stack) IsEmpty() bool {
 
 func (stack *Stack) Push(item interface{}) {
 	stack.top += 1
-	if stack.top > len(stack.data) - 1 {
+	if stack.top > len(stack.data)-1 {
 		stack.data = append(stack.data, item)
 	} else {
 		stack.data[stack.top] = item
@@ -53,4 +53,8 @@ func (stack *Stack) Top() interface{} {
 
 func (stack *Stack) Flush() {
 	stack.top = -1
+}
+
+func main() {
+
 }

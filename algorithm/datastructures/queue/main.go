@@ -1,4 +1,4 @@
-package algssss
+package main
 
 type ArrayQueue struct {
 	q    []interface{}
@@ -41,7 +41,6 @@ func (queue *ArrayQueue) DeQueue() interface{} {
 	return item
 }
 
-
 type CircularQueue struct {
 	q    []interface{}
 	cap  int
@@ -64,7 +63,7 @@ func (cq *CircularQueue) IsEmpty() bool {
 
 func (cq *CircularQueue) IsFull() bool {
 	// 栈满的条件，循环队列会空一格
-	return (cq.tail + 1) % cq.cap == cq.head
+	return (cq.tail+1)%cq.cap == cq.head
 }
 
 func (cq *CircularQueue) EnQueue(v interface{}) bool {
@@ -84,4 +83,8 @@ func (cq *CircularQueue) DeQueue() interface{} {
 	v := cq.q[cq.head]
 	cq.head = (cq.head + 1) % cq.cap
 	return v
+}
+
+func main() {
+
 }

@@ -1,4 +1,4 @@
-package algssss
+package linkedlist
 
 import (
 	"testing"
@@ -68,7 +68,7 @@ func (ll *LinkList) ReverseLinkList2() bool {
 
 		// pre 指向 cur
 		cur.Next = pre
-		
+
 		// move
 		pre = cur
 		cur = nexts

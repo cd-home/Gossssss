@@ -1,4 +1,4 @@
-package offersss
+package reverselist
 
 import "testing"
 

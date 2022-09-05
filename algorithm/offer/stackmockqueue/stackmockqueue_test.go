@@ -1,4 +1,4 @@
-package offersss
+package stackmockqueue
 
 import (
 	"testing"
@@ -28,23 +28,22 @@ func (c *CQueue) appendTail(value int) *CQueue {
 	return c
 }
 
-
 func (c *CQueue) deleteHead() int {
 	if len(c.In) == 0 && len(c.Out) == 0 {
 		return -1
 	}
 	if len(c.Out) > 0 {
-		value := c.Out[len(c.Out) - 1]
-		c.Out = c.Out[:len(c.Out) - 1]
+		value := c.Out[len(c.Out)-1]
+		c.Out = c.Out[:len(c.Out)-1]
 		return value
 	}
 	for len(c.In) > 0 {
-		value := c.In[len(c.In) - 1]
-		c.In = c.In[:len(c.In) - 1]
+		value := c.In[len(c.In)-1]
+		c.In = c.In[:len(c.In)-1]
 		c.Out = append(c.Out, value)
 	}
-	value := c.Out[len(c.Out) - 1]
-	c.Out = c.Out[:len(c.Out) - 1]
+	value := c.Out[len(c.Out)-1]
+	c.Out = c.Out[:len(c.Out)-1]
 	return value
 }
 

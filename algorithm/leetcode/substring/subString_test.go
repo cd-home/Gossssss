@@ -1,4 +1,4 @@
-package algssss
+package substring
 
 import (
 	"testing"

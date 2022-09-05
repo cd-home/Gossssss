@@ -1,4 +1,4 @@
-package offersss
+package minstack
 
 import (
 	"testing"

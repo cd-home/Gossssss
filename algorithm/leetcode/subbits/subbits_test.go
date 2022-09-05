@@ -1,9 +1,8 @@
-package algssss
+package subbits
 
 import (
 	"testing"
 )
-
 
 // 数组所有子集情况，不包括空集合 n^2 - 1
 /*
@@ -34,7 +33,7 @@ func SubSets(nums []uint) (ans [][]uint) {
 
 		for i, v = range nums {
 			// 判断当前的id二进制序列是否已经存在？
-			if mask >> i & 1 > 0 {
+			if mask>>i&1 > 0 {
 				set = append(set, v)
 			}
 		}
@@ -46,5 +45,5 @@ func SubSets(nums []uint) (ans [][]uint) {
 }
 
 func TestSubSets(t *testing.T) {
-	
+
 }
