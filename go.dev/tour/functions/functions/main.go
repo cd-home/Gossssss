@@ -2,16 +2,18 @@ package main
 
 import "fmt"
 
-// Foo name
+// Foo function name
 // Params list
 // Return list [support multi return Values]
+// 基本的函数模式
 func Foo(param1 string, param2 string, x, y int) (string, int, error) {
 	return param1 + param2, x + y, nil
 }
 
 // SameParamsType
-// When two or more consecutive named function parameters share a type,
+// When two or more consecutive named function parameters share a type[分享一个类型],
 // You can omit[省略] the type from all but the last.
+// 多个参数共享相同类型, 可以省略前面的类型, 除了最后一个
 func SameParamsType(x, y int) int {
 	return x + y
 }
