@@ -23,13 +23,6 @@ import (
 // complex64
 // complex128
 
-const PI = 3.14
-const Version = "v1.0.0"
-const Switch = false
-const CHAR = 'a'
-
-const num = 2
-
 func main() {
 	fmt.Println("Hello World!")
 	// 不同平台 不同位
@@ -65,23 +58,4 @@ func main() {
 
 	l := 3.14
 	fmt.Printf("%T\n", l)
-
-	// Constants
-	fmt.Println(PI)
-	fmt.Println(Version)
-	fmt.Println(Switch)
-	// CHAR ASCII
-	fmt.Println(CHAR)
-
-	//
-	fmt.Println(DoubleNumInt(num))
-	fmt.Println(DoubleNumFloat(num))
-}
-
-func DoubleNumInt(x int) int {
-	return x * x
-}
-
-func DoubleNumFloat(x float32) float32 {
-	return x * x
 }
