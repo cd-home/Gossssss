@@ -1,12 +1,18 @@
 // main packages
 package main
 
-// import packages [stdlib]
 import (
 	"Gossssss/go.dev/tour/packages/exports"
 	"fmt"
-	"math/rand"
 	"time"
+)
+
+// import packages [stdlib]
+// import .
+// import alia ""
+// import _ ""
+import (
+	"math/rand"
 )
 
 func ExportNameSpace() {
