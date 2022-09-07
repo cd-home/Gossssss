@@ -1,14 +1,13 @@
-package grpc
+package client
 
 import (
-	pb "Gossssss/demosss/grpc/proto"
+	pb "Gossssss/third_party/grpc/proto"
 	"context"
-	"testing"
-
+	"fmt"
 	"google.golang.org/grpc"
 )
 
-func TestClient(t *testing.T) {
+func main() {
 	// 服务地址
 	conn, _ := grpc.Dial("127.0.0.1:8081", grpc.WithInsecure())
 	defer conn.Close()
@@ -20,13 +19,13 @@ func TestClient(t *testing.T) {
 	response1, _ := client.SayHi(
 
 		context.Background(),
-		&pb.HelloRequest{Name: "li_yao"})
+		&pb.HelloRequest{Name: "yao"})
 
-	t.Log(response1.Msg)
+	fmt.Println(response1.Msg)
 
 	response2, _ := client.GetUpperName(
 		context.Background(), &pb.HelloRequest{
-			Name: "li_yao",
+			Name: "yao",
 		})
-	t.Log(response2.Msg)
+	fmt.Println(response2.Msg)
 }

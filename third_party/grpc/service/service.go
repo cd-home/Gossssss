@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "Gossssss/demosss/grpc/proto"
+	pb "Gossssss/third_party/grpc/proto"
 	"context"
 	"net"
 	"strings"
@@ -9,6 +9,7 @@ import (
 	"google.golang.org/grpc"
 )
 
+// Greeter
 // 必须要实现某个结构体
 type Greeter struct{}
 
@@ -26,8 +27,7 @@ func (g *Greeter) GetUpperName(ctx context.Context, req *pb.HelloRequest) (*pb.H
 }
 
 func main() {
-	// tcpdemo
-	listener, _ := net.Listen("tcpdemo", "127.0.0.1:8081")
+	listener, _ := net.Listen("tcp", "127.0.0.1:8081")
 
 	// 创建服务
 	srv := grpc.NewServer()
