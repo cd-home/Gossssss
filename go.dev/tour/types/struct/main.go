@@ -2,8 +2,9 @@ package main
 
 import "fmt"
 
+// Vertex
 // A struct is a collection of fields.
-
+// 结构体就是多个字段的集合
 type Vertex struct {
 	X int
 	Y int

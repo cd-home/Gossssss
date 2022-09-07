@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// 指针就是指向某个值的内存地址
 // Go has pointers. A pointer holds the memory address of a value.
 func main() {
 	// The type *T is a pointer to a T value. Its zero value is nil.

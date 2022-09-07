@@ -24,6 +24,8 @@ func DeclareSlice() {
 	nilSlice = append(nilSlice, 1)
 	printSlice(nilSlice)
 
+	// make 可以用来分配 带有长度 与 容量的 切片
+	// 通常分配预估大小与容量的切片是友好的
 	fmt.Println("make slice")
 	// make
 	slices := make([]int, 2, 10)
@@ -53,6 +55,7 @@ func SubSlice() {
 	fmt.Println("SubSlice")
 	slices := []int{1, 2, 3, 4}
 	// len = 2, cap = 3, count first to end
+	printSlice(slices)
 	sub1 := slices[1:3]
 	printSlice(sub1)
 	sub2 := slices[:]
@@ -68,7 +71,9 @@ func SubSlice() {
 
 	fmt.Println("over")
 	// over => new slice
+	// sub1 是子切片与 slices 共用底层数组, 但是当容量不够的时候, sub1扩容就会搬移到新的底层数组上面
 	sub1 = append(sub1, []int{5, 6, 7, 8, 9}...)
+	// 扩容之后再修改sub1, 就会发现已经是新的底层数组了
 	sub1[0] = 10
 	printSlice(slices)
 	printSlice(sub1)
@@ -85,9 +90,12 @@ func SubSlicing() {
 	printSlice(slices[1:3])
 }
 
+// ForRangeSlice
+// for-range 可用来遍历容器类型 如 数组、切片、映射、通道
 func ForRangeSlice() {
 	fmt.Println("ForRangeSlice")
 	slices := []int{1, 2, 3, 4}
+	// 第一个是索引, 第二个是对应索引值的复制(特别注意)
 	for index, value := range slices {
 		fmt.Println(index, value)
 		slices[index] *= 2
@@ -97,14 +105,18 @@ func ForRangeSlice() {
 
 func AppendSlices() {
 	fmt.Println("AppendSlices")
+	// A nil slice has a length and capacity of 0 and has no underlying array.
+	// nil slice 没有长度与容量=0, 并且没有底层的数组
 	// nil slice can append
 	var slices []int
 	slices = append(slices, 1)
 	slices = append(slices, 2)
 	others := []int{3, 4, 5}
-	// can append slices
-	slices = append(slices, others...)
 
+	// can append slices
+	// append 支持添加多个 (参数为不定参数模式)
+	slices = append(slices, others...)
+	slices = append(slices, 7, 8, 9)
 	printSlice(slices)
 }
 
@@ -113,6 +125,7 @@ func DeleteByIndex(slice []int, index int) []int {
 	return append(slice[:index], slice[index+1:]...)
 }
 
+// slice可以通过定义, 可以通过获取数组或者切片的子切片得到
 func main() {
 	DeclareSlice()
 	LenCapSlice()
