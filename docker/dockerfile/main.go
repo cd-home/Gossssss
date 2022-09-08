@@ -1,10 +1,10 @@
 package main
 
 import (
+	"fmt"
 	"io"
 	"log"
 	"net/http"
-	"os"
 )
 
 func main() {
@@ -13,13 +13,7 @@ func main() {
 		if err != nil {
 			log.Println(err)
 		}
-		f, err := os.OpenFile("news.json", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0777)
-		if err != nil {
-			log.Println(err)
-		}
-
-		defer f.Close()
-		f.WriteString(string(bs) + "\n")
+		fmt.Fprintf(rw, string(bs))
 	})
 	_ = http.ListenAndServe(":8999", nil)
 

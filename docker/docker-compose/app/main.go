@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Gossssss/demosss/compose/app/cache"
+	"Gossssss/docker/docker-compose/app/cache"
 	"bytes"
 	"context"
 	"io"
