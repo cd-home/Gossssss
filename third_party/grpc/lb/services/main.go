@@ -1,10 +1,14 @@
 package main
 
 import (
+	pb "Gossssss/third_party/grpc/api"
 	"Gossssss/third_party/grpc/lb/etcdv3/register"
+	"context"
 	"flag"
 	"fmt"
+	"google.golang.org/grpc"
 	"log"
+	"net"
 	"strings"
 )
 
@@ -20,6 +24,22 @@ func init() {
 	flag.StringVar(&port, "port", "8080", "port")
 	flag.StringVar(&service, "service", "hello", "service")
 	flag.Int64Var(&lease, "lease", 5, "lease")
+	flag.Parse()
+}
+
+type Greeter struct{}
+
+func (g *Greeter) SayHi(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, error) {
+	// code
+	return &pb.HelloResponse{
+		Msg: "hi, " + req.Name + ", From: " + port,
+	}, nil
+}
+
+func (g *Greeter) GetUpperName(ctx context.Context, req *pb.HelloRequest) (*pb.HelloResponse, error) {
+	return &pb.HelloResponse{
+		Msg: strings.ToUpper(req.Name),
+	}, nil
 }
 
 func main() {
@@ -30,5 +50,15 @@ func main() {
 		log.Fatal(err)
 	}
 	defer sr.Revoke()
-	select {}
+
+	listener, err := net.Listen("tcp", addr)
+	if err != nil {
+		log.Fatal(err)
+	}
+	grpcServer := grpc.NewServer()
+	pb.RegisterHelloServiceServer(grpcServer, &Greeter{})
+	err = grpcServer.Serve(listener)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

@@ -1,7 +1,7 @@
 package client
 
 import (
-	pb "Gossssss/third_party/grpc/proto"
+	pb "Gossssss/third_party/grpc/api"
 	"context"
 	"fmt"
 	"google.golang.org/grpc"

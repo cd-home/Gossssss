@@ -1,7 +1,7 @@
 package main
 
 import (
-	pb "Gossssss/third_party/grpc/proto"
+	pb "Gossssss/third_party/grpc/api"
 	"context"
 	"net"
 	"strings"
