@@ -1,4 +1,4 @@
-package equals
+package reflect
 
 import (
 	"reflect"

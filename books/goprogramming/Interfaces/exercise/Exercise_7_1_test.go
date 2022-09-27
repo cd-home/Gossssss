@@ -1,4 +1,4 @@
-package interfaces_test
+package exercise_test
 
 import (
 	"bufio"
