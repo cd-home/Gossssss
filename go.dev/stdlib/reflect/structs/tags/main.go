@@ -7,31 +7,51 @@ import (
 
 type User struct {
 	Name string `json:"name"`
-	age  uint8  `json:"age"`
+	Age  uint8  `json:"age"`
 }
 
 func main() {
-	var i interface{} = &User{
+	user := &User{
 		Name: "yao",
-		age:  28,
+		Age:  28,
 	}
-	tf := reflect.TypeOf(i).Elem()
-	for i := 0; i < tf.NumField(); i++ {
-		f := tf.Field(i)
+	// Type
+	fmt.Println("Type........")
+	rt := reflect.TypeOf(user).Elem()
+	for i := 0; i < rt.NumField(); i++ {
+		f := rt.Field(i)
 		fmt.Println(f.Tag.Get("json"))
 		fmt.Println(f.IsExported())
 	}
 
-	// need struct
-	vf := reflect.ValueOf(i)
-	if !vf.IsNil() {
-		vf = vf.Elem()
+	fmt.Println()
+	fmt.Println("Value........")
+	// Value
+	rv := reflect.ValueOf(user)
+
+	// 由于前面是 &user的指针, 都需要Elem
+	velem := rv.Elem()
+	if velem.Kind() == reflect.Struct {
+		for i := 0; i < velem.NumField(); i++ {
+			fmt.Println("CanSet: ", velem.Field(i).CanSet())
+			// 字段的类型
+			fmt.Println(velem.Field(i).Kind())
+			switch velem.Field(i).Kind() {
+			case reflect.String:
+				// 字段的值
+				fmt.Println(velem.Field(i).String())
+			case reflect.Uint8:
+				fmt.Println(velem.Field(i).Uint())
+			}
+		}
 	}
-	if vf.Kind() == reflect.Struct {
-		fmt.Println(vf.Field(0).CanSet())
-		fmt.Println(vf.Field(1).CanSet())
-	}
-	name := vf.Elem().FieldByName("Name")
+	// 由于 &User是指针, 所有需要Elem()
+	name := velem.FieldByName("Name")
+	// 设置值
 	name.SetString("mike")
 	fmt.Println(name)
+
+	//fmt.Println(rtm.Implements())
+	telem := rv.Type().Elem()
+	fmt.Println(telem.Name())
 }

@@ -1,9 +1,8 @@
-package methods
+package main
 
 import (
 	"fmt"
 	"reflect"
-	"testing"
 )
 
 type User struct {
@@ -19,40 +18,38 @@ func (u User) SayHi(msg string) {
 	fmt.Printf("%s, I am %s\n", msg, u.Name)
 }
 
-func TestReflectCall(t *testing.T) {
-	user := User{Name: "GodYao", Age: 27}
+func main() {
+	user := User{Name: "yao", Age: 28}
 
 	rv := reflect.ValueOf(&user)
+
 	// By MethodName Call
 	f := rv.MethodByName("SayHello")
-
 	f.Call([]reflect.Value{})
 
-	// Got Fields
-	ev := rv.Elem()
-	for i := 0; i < ev.NumField(); i++ {
-		field := ev.Field(i)
-		fmt.Printf("%d %s = %v \n", i, field.Type(), field.Interface())
-	}
-
-	// Call Methods By MethodName
+	// Call Methods By MethodName and With Params
 	Invoke(&user, "SayHello")
 	Invoke(&user, "SayHi", "Hi")
 
-	// tt.Log("line----")
-
 	// Func IsExported
-	rf := reflect.TypeOf(&user)
-	e := rf.Elem()
+	rt := reflect.TypeOf(&user)
+	e := rt.Elem()
 	for i := 0; i < e.NumMethod(); i++ {
 		m := e.Method(i)
-		t.Log(m.Name)
+		fmt.Println(m.Name)
 		if m.Name == "SayHello" && m.IsExported() {
 			// one way
 			rv.MethodByName(m.Name).Call([]reflect.Value{})
 			// another way, Func must use receiver be the first argument
 			m.Func.Call([]reflect.Value{reflect.ValueOf(user)})
 		}
+	}
+
+	// Got Fields
+	ev := rv.Elem()
+	for i := 0; i < ev.NumField(); i++ {
+		field := ev.Field(i)
+		fmt.Printf("%d %s = %v \n", i, field.Type(), field.Interface())
 	}
 }
 

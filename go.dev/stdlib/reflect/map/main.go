@@ -6,13 +6,23 @@ import (
 )
 
 func main() {
-	m := map[string]string{"one": "1", "two": "2"}
-	vm := reflect.ValueOf(m)
-	if vm.Kind() == reflect.Map {
-		for _, key := range vm.MapKeys() {
-			fmt.Println(vm.MapIndex(key))
+	m := map[string]string{"name": "yao", "age": "28"}
+	rvm := reflect.ValueOf(m)
+	if rvm.Kind() == reflect.Map {
+		// get
+		for _, key := range rvm.MapKeys() {
+			fmt.Println(key, rvm.MapIndex(key))
+			// set
+			rvm.SetMapIndex(reflect.ValueOf("name"), reflect.ValueOf("mike"))
+			rvm.SetMapIndex(reflect.ValueOf("age"), reflect.ValueOf("20"))
 		}
 	}
-	tf2 := reflect.TypeOf(m)
-	fmt.Println(tf2.Size())
+	// get
+	fmt.Println(rvm.MapIndex(reflect.ValueOf("name")))
+	fmt.Println(m)
+
+	rtm := reflect.TypeOf(m)
+	// key type
+	fmt.Println(rtm.Key())
+	fmt.Println(rtm.Comparable())
 }
