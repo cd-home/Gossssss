@@ -20,6 +20,7 @@ func main() {
 	rt := reflect.TypeOf(user).Elem()
 	for i := 0; i < rt.NumField(); i++ {
 		f := rt.Field(i)
+		fmt.Println(f.Name)
 		fmt.Println(f.Tag.Get("json"))
 		fmt.Println(f.IsExported())
 	}
@@ -31,6 +32,7 @@ func main() {
 
 	// 由于前面是 &user的指针, 都需要Elem
 	velem := rv.Elem()
+	telem := rv.Type().Elem()
 	if velem.Kind() == reflect.Struct {
 		for i := 0; i < velem.NumField(); i++ {
 			fmt.Println("CanSet: ", velem.Field(i).CanSet())
@@ -52,6 +54,5 @@ func main() {
 	fmt.Println(name)
 
 	//fmt.Println(rtm.Implements())
-	telem := rv.Type().Elem()
 	fmt.Println(telem.Name())
 }
