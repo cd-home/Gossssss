@@ -126,7 +126,7 @@ func UploadFiles(writer http.ResponseWriter, request *http.Request) {
 
 // Download file
 func Download(w http.ResponseWriter, r *http.Request) {
-	file, _ := os.Open("name.txt")
+	file, _ := os.Open("/Users/admin/Documents/Command_Line_Tools_for_Xcode_14.dmg")
 	defer file.Close()
 	w.Header().Set("Content-Disposition", `attachment; filename=`+file.Name())
 	io.Copy(w, file)
@@ -134,5 +134,6 @@ func Download(w http.ResponseWriter, r *http.Request) {
 
 func FileUpAndDownServer() {
 	http.HandleFunc("/upload", UploadFile)
+	http.HandleFunc("/dw", Download)
 	http.ListenAndServe(":8080", nil)
 }

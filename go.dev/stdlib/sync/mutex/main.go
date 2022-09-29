@@ -1,9 +1,8 @@
-package sync_test
+package main
 
 import (
 	"fmt"
 	"sync"
-	"testing"
 )
 
 // go test -race -v mutex_test.go
@@ -19,7 +18,7 @@ func (m *SafeMap) Set(key string, value string) {
 	m.m[key] = value
 }
 
-func TestSafeMap(t *testing.T) {
+func main() {
 	var wg sync.WaitGroup
 	wg.Add(10)
 
@@ -30,7 +29,6 @@ func TestSafeMap(t *testing.T) {
 			wg.Done()
 		}(i)
 	}
-	
 	wg.Wait()
-	t.Log(sm)
+	fmt.Println(sm)
 }
