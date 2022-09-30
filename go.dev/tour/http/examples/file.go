@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"time"
@@ -13,68 +14,61 @@ import (
 func UploadBigFile(w http.ResponseWriter, r *http.Request) {
 	mr, err := r.MultipartReader()
 	if err != nil {
-		fmt.Sprintln(err)
 		fmt.Fprintln(w, err)
 		return
 	}
-
 	values := make(map[string][]string, 0)
 	maxValueBytes := int64(10 << 20)
-	for {
-		part, err := mr.NextPart()
-		if err == io.EOF {
-			break
-		}
-		if part == nil {
-			return
-		}
-		name := part.FormName()
-		if name == "" {
-			continue
-		}
-
-		fileName := part.FileName()
-
-		fmt.Println(fileName)
-
-		var b bytes.Buffer
-
-		if fileName == "" {
-			n, err := io.CopyN(&b, part, maxValueBytes)
-			if err != nil && err != io.EOF {
-				fmt.Sprintln(err)
-				fmt.Fprintln(w, err)
-
-				return
-			}
-
-			maxValueBytes -= n
-			if maxValueBytes <= 0 {
-				msg := "multipart message too large"
-				fmt.Fprint(w, msg)
-				return
-			}
-			values[name] = append(values[name], b.String())
-		}
-
-		dst, err := os.Create("./static/" + fileName)
-
-		if err != nil {
-			fmt.Fprint(w, err.Error())
-		}
-
-		defer dst.Close()
-
+	go func() {
 		for {
-			buffer := make([]byte, 100000)
-			cBytes, err := part.Read(buffer)
+			part, err := mr.NextPart()
 			if err == io.EOF {
 				break
 			}
-			dst.Write(buffer[0:cBytes])
+			if part == nil {
+				return
+			}
+			name := part.FormName()
+			if name == "" {
+				continue
+			}
+			fileName := part.FileName()
+			fmt.Println(fileName)
+			var b bytes.Buffer
+			if fileName == "" {
+				log.Println(111)
+				n, err := io.CopyN(&b, part, maxValueBytes)
+				if err != nil && err != io.EOF {
+					fmt.Fprintln(w, err)
+					return
+				}
+				maxValueBytes -= n
+				if maxValueBytes <= 0 {
+					msg := "multipart message too large"
+					fmt.Fprint(w, msg)
+					return
+				}
+				values[name] = append(values[name], b.String())
+			}
+			log.Println(222)
+			dst, err := os.Create("./static/" + fileName)
+			if err != nil {
+				fmt.Fprint(w, err.Error())
+			}
+			defer dst.Close()
+			for {
+				log.Println(333)
+				buffer := make([]byte, 100000)
+				cBytes, err := part.Read(buffer)
+				if err == io.EOF {
+					break
+				}
+				dst.Write(buffer[0:cBytes])
+			}
 		}
-
-	}
+	}()
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintln(w, "Hello")
 }
 
 // UploadFile small file upload
@@ -133,7 +127,7 @@ func Download(w http.ResponseWriter, r *http.Request) {
 }
 
 func FileUpAndDownServer() {
-	http.HandleFunc("/upload", UploadFile)
+	http.HandleFunc("/upload", UploadBigFile)
 	http.HandleFunc("/dw", Download)
 	http.ListenAndServe(":8080", nil)
 }
