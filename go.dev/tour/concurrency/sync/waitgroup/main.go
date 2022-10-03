@@ -1,17 +1,17 @@
-package waitgroup
+package main
 
 import (
+	"fmt"
 	"sync"
-	"testing"
 	"time"
 )
 
-func TestWaitGroup(t *testing.T) {
+func main() {
 	wg := sync.WaitGroup{}
 	testMap := make(map[int]int)
 
 	// lock := &sync.Mutex{}
-	// rezo value can be used
+	// zero value can be used
 	var lock sync.Mutex
 
 	wg.Add(3)
@@ -23,7 +23,7 @@ func TestWaitGroup(t *testing.T) {
 			lock.Lock()
 			testMap[j] = j
 			time.Sleep(time.Second * time.Duration(j))
-			t.Log(testMap)
+			fmt.Println(testMap)
 			lock.Unlock()
 		}(i)
 	}

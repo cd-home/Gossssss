@@ -1,13 +1,12 @@
-package waitgroup
+package main
 
 import (
 	"fmt"
 	"runtime"
 	"sync"
-	"testing"
 )
 
-func TestGoProcessNums(t *testing.T) {
+func main() {
 	runtime.GOMAXPROCS(1)
 
 	var wg sync.WaitGroup
@@ -31,5 +30,5 @@ func TestGoProcessNums(t *testing.T) {
 	}()
 
 	wg.Wait()
-	t.Log("done")
+	fmt.Println("done")
 }

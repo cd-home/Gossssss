@@ -67,6 +67,7 @@ func ReadChannelByForLoop() {
 	close(cds)
 	for {
 		// ok is false if there are no more values to receive and the channel is closed.
+		// PS: ok is false 表示, 通道关闭, 无数据可消费
 		v, ok := <-cds
 		if !ok {
 			break
@@ -108,5 +109,4 @@ func main() {
 
 	// Read Channel
 	ReadChannelByForLoop()
-
 }
