@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func BubbleSort(arr []int) {
 	l := len(arr)
 	if l <= 1 {
@@ -23,5 +25,7 @@ func BubbleSort(arr []int) {
 }
 
 func main() {
-
+	s := []int{5, 2, 3, 1, 4}
+	BubbleSort(s)
+	fmt.Println(s)
 }
