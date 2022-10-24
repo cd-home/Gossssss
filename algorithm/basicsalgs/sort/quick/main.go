@@ -18,6 +18,7 @@ func separateSort(arr []int, left, right int) {
 
 func partition(arr []int, left, right int) int {
 	// 先把这个中间值保存起来
+	// 如果你选左边基准, 那么必须从右边开始移动比较, 避免完全排序特殊情况下 会交换最大的过去
 	pivot := arr[left]
 	// 直到 left right 相遇
 	for left < right {
