@@ -13,7 +13,8 @@ func SelectionSort(arr []int) {
 	if n <= 1 {
 		return
 	}
-	for i := 0; i < n; i++ {
+	// n 个元素， n-1次循环即可
+	for i := 0; i < n-1; i++ {
 		min := i
 		// 找最小
 		for j := i + 1; j < n; j++ {
