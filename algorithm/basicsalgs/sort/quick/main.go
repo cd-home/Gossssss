@@ -1,35 +1,46 @@
 package main
 
+import "fmt"
+
 func QuickSort(arr []int) {
 	separateSort(arr, 0, len(arr)-1)
 }
 
-func separateSort(arr []int, start, end int) {
-	if start >= end {
+func separateSort(arr []int, left, right int) {
+	if left >= right {
 		return
 	}
-	i := partition(arr, start, end)
-	separateSort(arr, start, i-1)
-	separateSort(arr, i+1, end)
+	// 每次进入partition i 的位置元素就已经排好序
+	i := partition(arr, left, right)
+	separateSort(arr, left, i-1)
+	separateSort(arr, i+1, right)
 }
 
-func partition(arr []int, start, end int) int {
-	pivot := arr[end]
-	var i = start
-	// i移动+1，直到遇到比pivot大的数字,i标记了比pivot的数字
-	// j一直往后遍历，找到比pivot小的 交换 i j
-	for j := start; j < end; j++ {
-		if arr[j] < pivot {
-			if i != j {
-				arr[i], arr[j] = arr[j], arr[i]
-			}
-			i++
+func partition(arr []int, left, right int) int {
+	// 先把这个中间值保存起来
+	pivot := arr[left]
+	// 直到 left right 相遇
+	for left < right {
+		// 先移动右边, 如果大于pivot就移动
+		for left < right && arr[right] >= pivot {
+			right--
 		}
+		// 直到遇到小于的
+		arr[left] = arr[right]
+		// right 坑位留出来了
+
+		// left 比 pivot 大的, 填right的坑
+		for left < right && arr[left] <= pivot {
+			left++
+		}
+		arr[right] = arr[left]
 	}
-	arr[i], arr[end] = arr[end], arr[i]
-	return i
+	arr[left] = pivot
+	return left
 }
 
 func main() {
-
+	arr := []int{2, 1, 2, 3, 45, 67, 10}
+	QuickSort(arr)
+	fmt.Println(arr)
 }
