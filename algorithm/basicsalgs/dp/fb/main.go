@@ -8,10 +8,11 @@ func main() {
 	fmt.Println(fbUltimate(6))
 }
 
-const max = 45
-
 func fbDp(n int) int {
-	f := make(map[int]int, max)
+	if n < 2 {
+		return n
+	}
+	f := make([]int, n+1)
 	f[0] = 0
 	f[1] = 1
 	for i := 2; i <= n; i++ {
