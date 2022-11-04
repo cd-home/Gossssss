@@ -3,10 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println(UgNumber(8))
+	fmt.Println(isUgly(8))
 }
 
-func UgNumber(num int32) bool {
+func isUgly(num int32) bool {
 	if num <= 0 {
 		return false
 	}
