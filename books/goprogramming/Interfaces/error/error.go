@@ -1,7 +1,11 @@
 package main
 
-import "errors"
+import (
+	"errors"
+	"fmt"
+)
 
 func main() {
-	errors.New("")
+	e := errors.New("error is interface")
+	fmt.Println(e.Error())
 }
