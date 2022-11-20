@@ -17,6 +17,17 @@ func NilMapPanic() map[string]string {
 	return maps
 }
 
+func NilMapCanRead() {
+	var testMap map[string]string
+	// map cannot be nil
+	// testMap["name"] = "foo"
+	fmt.Println(testMap)
+
+	testMap = make(map[string]string)
+	testMap["name"] = "foo"
+	fmt.Println(testMap)
+}
+
 func ForRangeMap() {
 	fmt.Println("ForRangeMap")
 	maps := MakeMap(10)
@@ -75,7 +86,7 @@ func main() {
 	// panic: assignment to entry in nil map
 	//nilMap := NilMapPanic()
 	//nilMap["data"] = "Go"
-	//
+	// 	注意： nil map 可以读key, 不会panic
 	//fmt.Println(nilMap)
 
 	RetrieveElement()
