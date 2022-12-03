@@ -1,14 +1,14 @@
 # Gossssss
 Gossssss
-├── README.md
-├── algssss
-├── bestpracticesss
-├── booksss
-├── demosss
-├── design
-├── go.mod
-├── go.sum
-├── offersss
-├── snippetsss
-├── stdsss
-└── testsss
+    ├── README.md
+    ├── algorithm
+    ├── books
+    ├── design
+    ├── docker
+    ├── go.dev
+    ├── go.mod
+    ├── go.sum
+    ├── k8s
+    ├── pkgs
+    ├── snippetsss
+    └── tests
