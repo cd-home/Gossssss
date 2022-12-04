@@ -29,4 +29,12 @@ func main() {
 	fmt.Println(x.b) // "42"
 
 	// 注意不要将 uintptr 赋值给一个变量
+	// pT := uintptr(unsafe.Pointer(new(T))) // 提示: 错误!
+	// 没有指针引用new的变量
+
+	// 将所有包含变量地址的uintptr类型变量当作BUG处理
+	// 同时减少不必要的unsafe.Pointer类型到uintptr类型的转换
+	// 在第一个例子中，有三个转换——字段偏移量到uintptr的转换和转回unsafe.Pointer类型的操作——所有的转换全在一个表达式完成
+
+	// 最后, 你可能在大多数情况下没有必要使用 unsafe;
 }
