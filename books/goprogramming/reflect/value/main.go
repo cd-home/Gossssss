@@ -26,4 +26,16 @@ func main() {
 		要想知道具体类型的动态类型以及值只能使用断言.
 		reflect.Value提供了很多API来检测内容.
 	*/
+	//  通过reflect.Value
+	// 方式1: Addr找到reflect.Value的指针, 然后调用Interface() 找到interface{}
+	// 然后断言获取普通类型的指针
+	y := 2
+	d := reflect.ValueOf(&y).Elem()
+	px := d.Addr().Interface().(*int)
+	*px = 3
+	fmt.Println(y)
+	// 方式2: 直接通过提供的API
+	fmt.Println(d.CanAddr(), d.CanSet())
+	d.Set(reflect.ValueOf(4))
+	fmt.Println(y)
 }
