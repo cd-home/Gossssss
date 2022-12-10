@@ -1,60 +1,46 @@
 package main
 
-type Stacker interface {
-	Push(item interface{})
-	Pop() interface{}
-	IsEmpty() bool
-	Top() interface{}
-	Flush() bool
-}
+import "fmt"
 
-type Stack struct {
-	data []interface{}
+type Stack[T any] struct {
+	data []T
 	top  int
 }
 
-func NewStack(size int) *Stack {
-	return &Stack{
-		data: make([]interface{}, 0, size),
+func NewStack[T any](size int) *Stack[T] {
+	return &Stack[T]{
+		data: make([]T, 0, size),
 		top:  -1,
 	}
 }
 
-func (stack *Stack) IsEmpty() bool {
+func (stack *Stack[T]) IsEmpty() bool {
 	return stack.top < 0
 }
 
-func (stack *Stack) Push(item interface{}) {
+func (stack *Stack[T]) Push(item T) {
 	stack.top += 1
-	if stack.top > len(stack.data)-1 {
-		stack.data = append(stack.data, item)
-	} else {
-		stack.data[stack.top] = item
-	}
+	stack.data = append(stack.data, item)
 }
 
-func (stack *Stack) Pop() interface{} {
+func (stack *Stack[T]) Pop() (item T) {
 	if stack.IsEmpty() {
-		return nil
+		return item
 	}
-	item := stack.data[stack.top]
+	item = stack.data[stack.top]
 	stack.top--
+	stack.data = stack.data[:stack.top]
 	return item
-}
-
-func (stack *Stack) Top() interface{} {
-	if stack.IsEmpty() {
-		return nil
-	}
-	item := stack.data[stack.top]
-	stack.top--
-	return item
-}
-
-func (stack *Stack) Flush() {
-	stack.top = -1
 }
 
 func main() {
+	stack := NewStack[int](10)
+	stack.Push(1)
+	stack.Push(2)
+	stack.Push(3)
+	stack.Push(4)
 
+	fmt.Println(stack.top)
+	fmt.Println(stack.IsEmpty())
+	fmt.Println(stack.Pop())
 }
