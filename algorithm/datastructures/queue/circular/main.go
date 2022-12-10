@@ -1,44 +1,7 @@
 package main
 
-type ArrayQueue struct {
-	q    []interface{}
-	cap  int
-	head int
-	tail int
-}
+func main() {
 
-func NewArrayQueue(n int) *ArrayQueue {
-	return &ArrayQueue{
-		q:    make([]interface{}, n),
-		cap:  0,
-		head: 0,
-		tail: 0,
-	}
-}
-
-func (queue *ArrayQueue) IsEmpty() bool {
-	return queue.head == queue.tail
-}
-
-func (queue *ArrayQueue) EnQueue(item interface{}) bool {
-	if queue.tail == queue.cap {
-		return false
-	}
-	// 插入
-	queue.q[queue.tail] = item
-	// 移动
-	queue.tail++
-	return true
-}
-
-func (queue *ArrayQueue) DeQueue() interface{} {
-	// 没有数据
-	if queue.IsEmpty() {
-		return nil
-	}
-	item := queue.q[queue.head]
-	queue.head++
-	return item
 }
 
 type CircularQueue struct {
@@ -83,8 +46,4 @@ func (cq *CircularQueue) DeQueue() interface{} {
 	v := cq.q[cq.head]
 	cq.head = (cq.head + 1) % cq.cap
 	return v
-}
-
-func main() {
-
 }
