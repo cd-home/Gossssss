@@ -2,17 +2,8 @@ package main
 
 import "fmt"
 
-func main() {
-	arr := []int{5, 2, 3, 1, 4}
-	SelectionSort(arr)
-	fmt.Println(arr)
-}
-
 func SelectionSort(arr []int) {
 	n := len(arr)
-	if n <= 1 {
-		return
-	}
 	// n 个元素， n-1次循环即可
 	for i := 0; i < n-1; i++ {
 		min := i
@@ -24,4 +15,10 @@ func SelectionSort(arr []int) {
 		}
 		arr[i], arr[min] = arr[min], arr[i]
 	}
+}
+
+func main() {
+	arr := []int{5, 2, 3, 1, 4}
+	SelectionSort(arr)
+	fmt.Println(arr)
 }
