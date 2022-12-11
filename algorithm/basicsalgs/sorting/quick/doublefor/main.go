@@ -16,6 +16,7 @@ func separateSort(arr []int, left, right int) {
 	separateSort(arr, i+1, right)
 }
 
+// partition 选择基准值, 将基准值位置确定
 func partition(arr []int, left, right int) int {
 	// 先把这个中间值保存起来
 	// 如果你选左边基准, 那么必须从右边开始移动比较, 避免完全排序特殊情况下 会交换最大的过去
