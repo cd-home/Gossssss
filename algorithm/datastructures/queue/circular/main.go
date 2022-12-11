@@ -1,49 +1,61 @@
 package main
 
-func main() {
+import "fmt"
 
+type CircularQueue[T any] struct {
+	queue   []T
+	maxsize int
+	front   int
+	rear    int
 }
 
-type CircularQueue struct {
-	q    []interface{}
-	cap  int
-	head int
-	tail int
-}
-
-func NewCircularQueue(n int) *CircularQueue {
-	return &CircularQueue{
-		q:    make([]interface{}, n),
-		cap:  n,
-		head: 0,
-		tail: 0,
+func NewCircularQueue[T any](maxsize int) *CircularQueue[T] {
+	return &CircularQueue[T]{
+		queue:   make([]T, maxsize),
+		maxsize: maxsize,
 	}
 }
 
-func (cq *CircularQueue) IsEmpty() bool {
-	return cq.head == cq.tail
+func (cq *CircularQueue[T]) IsEmpty() bool {
+	return cq.rear == cq.front
 }
 
-func (cq *CircularQueue) IsFull() bool {
+func (cq *CircularQueue[T]) IsFull() bool {
 	// 栈满的条件，循环队列会空一格
-	return (cq.tail+1)%cq.cap == cq.head
+	return (cq.rear+1)%cq.maxsize == cq.front
 }
 
-func (cq *CircularQueue) EnQueue(v interface{}) bool {
+func (cq *CircularQueue[T]) EnQueue(item T) bool {
 	if cq.IsFull() {
 		return false
 	}
-	cq.q[cq.tail] = v
+	cq.queue[cq.rear] = item
 	// 下一个位置，不能++，因为是环形的
-	cq.tail = (cq.tail + 1) % cq.cap
+	cq.rear = (cq.rear + 1) % cq.maxsize
 	return true
 }
 
-func (cq *CircularQueue) DeQueue() interface{} {
+func (cq *CircularQueue[T]) DeQueue() (item T) {
 	if cq.IsEmpty() {
-		return nil
+		return item
 	}
-	v := cq.q[cq.head]
-	cq.head = (cq.head + 1) % cq.cap
-	return v
+	item = cq.queue[cq.front]
+	// 设置零值
+	var temp T
+	cq.queue[cq.front] = temp
+	cq.front = (cq.front + 1) % cq.maxsize
+	return item
+}
+
+func main() {
+	cq := NewCircularQueue[int](5)
+	cq.EnQueue(1)
+	cq.EnQueue(2)
+	cq.EnQueue(3)
+	cq.EnQueue(4)
+	cq.EnQueue(5)
+	fmt.Println(cq.EnQueue(6))
+	fmt.Println(cq.DeQueue())
+	fmt.Println(cq.EnQueue(6))
+	fmt.Println(cq.queue)
 }
