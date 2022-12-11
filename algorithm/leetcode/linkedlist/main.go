@@ -1,47 +1,43 @@
 package linkedlist
 
-import (
-	"testing"
-)
-
-// 节点
+// Node 节点
 type Node struct {
 	Data interface{}
 	Next *Node
 }
 
-// 链表
+// LinkList 链表
 type LinkList struct {
 	head   *Node //头节点，方便操作链表
 	length uint
 }
 
-// 新建节点
+// NewNode 新建节点
 func NewNode(data interface{}) *Node {
 	return &Node{Data: data, Next: nil}
 }
 
-// 获取节点的下一个节点
+// GetNodeNext 获取节点的下一个节点
 func (n *Node) GetNodeNext() *Node {
 	return n.Next
 }
 
-// 获取节点的值
+// GetNodeData 获取节点的值
 func (n *Node) GetNodeData() interface{} {
 	return n.Data
 }
 
-// 新建链表
+// NewLinkList 新建链表
 func NewLinkList(data interface{}) *LinkList {
 	return &LinkList{head: NewNode(data), length: 0}
 }
 
-// IsEmpty
+// IsEmpty 是否为空
 func (ll *LinkList) IsEmpty() bool {
 	return ll.head.Next == nil
 }
 
-// 反转链表
+// ReverseLinkList 反转链表
 func (ll *LinkList) ReverseLinkList() bool {
 	if ll.IsEmpty() {
 		return false
@@ -55,7 +51,7 @@ func (ll *LinkList) ReverseLinkList() bool {
 	return true
 }
 
-// 反转链表2
+// ReverseLinkList2 反转链表2
 func (ll *LinkList) ReverseLinkList2() bool {
 	if ll.head == nil || ll.head.Next == nil {
 		return false
@@ -77,7 +73,7 @@ func (ll *LinkList) ReverseLinkList2() bool {
 	return true
 }
 
-// 判断是否有环
+// HasCycle 判断是否有环
 func (ll *LinkList) HasCycle() bool {
 	if ll.head != nil {
 		// 快慢指针
@@ -95,7 +91,7 @@ func (ll *LinkList) HasCycle() bool {
 	return false
 }
 
-// 获取中间节点
+// FindMiddleNode 获取中间节点
 func (ll *LinkList) FindMiddleNode() *Node {
 	if ll.head == nil || ll.head.Next == nil {
 		return nil
@@ -112,7 +108,7 @@ func (ll *LinkList) FindMiddleNode() *Node {
 	return slow
 }
 
-// 获取倒数第K个节点
+// FindDescKNode 获取倒数第K个节点
 func (ll *LinkList) FindDescKNode(k uint) *Node {
 	if k <= 0 || ll.head == nil || ll.length < k {
 		return nil
@@ -134,7 +130,7 @@ func (ll *LinkList) FindDescKNode(k uint) *Node {
 	return second
 }
 
-// 合并有序链表
+// MergeSortedLinkList 合并有序链表
 func (ll *LinkList) MergeSortedLinkList(l *LinkList) *LinkList {
 	if l == nil || l.head.Next == nil {
 		return ll
@@ -163,8 +159,4 @@ func (ll *LinkList) MergeSortedLinkList(l *LinkList) *LinkList {
 		cur.Next = cur2
 	}
 	return newLinkList
-}
-
-func TestReverseLinkList(t *testing.T) {
-
 }
