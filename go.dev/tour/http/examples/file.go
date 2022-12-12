@@ -1,98 +1,22 @@
 package http
 
 import (
-	"bytes"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"time"
 )
 
-// UploadBigFile TODO upload
-func UploadBigFile(w http.ResponseWriter, r *http.Request) {
-	mr, err := r.MultipartReader()
-	if err != nil {
-		fmt.Fprintln(w, err)
-		return
-	}
-	values := make(map[string][]string, 0)
-	maxValueBytes := int64(10 << 20)
-	go func() {
-		for {
-			part, err := mr.NextPart()
-			if err == io.EOF {
-				break
-			}
-			if part == nil {
-				return
-			}
-			name := part.FormName()
-			if name == "" {
-				continue
-			}
-			fileName := part.FileName()
-			fmt.Println(fileName)
-			var b bytes.Buffer
-			if fileName == "" {
-				log.Println(111)
-				n, err := io.CopyN(&b, part, maxValueBytes)
-				if err != nil && err != io.EOF {
-					fmt.Fprintln(w, err)
-					return
-				}
-				maxValueBytes -= n
-				if maxValueBytes <= 0 {
-					msg := "multipart message too large"
-					fmt.Fprint(w, msg)
-					return
-				}
-				values[name] = append(values[name], b.String())
-			}
-			log.Println(222)
-			dst, err := os.Create("./static/" + fileName)
-			if err != nil {
-				fmt.Fprint(w, err.Error())
-			}
-			defer dst.Close()
-			for {
-				log.Println(333)
-				buffer := make([]byte, 100000)
-				cBytes, err := part.Read(buffer)
-				if err == io.EOF {
-					break
-				}
-				dst.Write(buffer[0:cBytes])
-			}
-		}
-	}()
-	w.WriteHeader(http.StatusOK)
-	fmt.Fprintln(w, "Hello")
-}
-
 // UploadFile small file upload
 func UploadFile(writer http.ResponseWriter, request *http.Request) {
-	// Form-Data Body Fields
-	//request.ParseForm()
-	//request.PostForm.Get()
-
-	// Not include URL
-	//request.PostFormValue()
-
-	// URL AND Form-Data Body
-	//request.ParseForm()
-	//request.Form.Get()
-
 	// Use this OK !
 	//request.FormValue()
 	val := request.FormValue("name")
 	fmt.Println(val)
-
 	// One
 	//request.ParseMultipartForm()
 	//request.MultipartForm.File[""]
-
 	// Two
 	f, header, _ := request.FormFile("upload")
 	defer f.Close()
@@ -120,14 +44,15 @@ func UploadFiles(writer http.ResponseWriter, request *http.Request) {
 
 // Download file
 func Download(w http.ResponseWriter, r *http.Request) {
-	file, _ := os.Open("/Users/admin/Documents/Command_Line_Tools_for_Xcode_14.dmg")
+	path, _ := os.Getwd()
+	file, _ := os.Open(path + "/go.dev/tour/http/examples/file.go")
 	defer file.Close()
 	w.Header().Set("Content-Disposition", `attachment; filename=`+file.Name())
 	io.Copy(w, file)
 }
 
 func FileUpAndDownServer() {
-	http.HandleFunc("/upload", UploadBigFile)
+	http.HandleFunc("/upload", UploadFile)
 	http.HandleFunc("/dw", Download)
 	http.ListenAndServe(":8080", nil)
 }
