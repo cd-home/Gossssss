@@ -11,7 +11,12 @@ func main() {
 	s[2] = 2
 	s[3] = 3
 	s[4] = 4
+	// range
 	for index, value := range s {
 		fmt.Println(index, value)
+	}
+	// for-index
+	for i := 0; i < len(s); i++ {
+		fmt.Println(s[i])
 	}
 }
