@@ -6,8 +6,6 @@ import "fmt"
 type LinkedList[T any] struct {
 	// 头节点，方便操作链表
 	Head *Node[T]
-	// 元素个数
-	Length int
 }
 
 // Node 节点
@@ -25,13 +23,12 @@ func NewNode[T any](data T) *Node[T] {
 
 // NewLinkList 新建链表
 func NewLinkList[T any](data T) *LinkedList[T] {
-	return &LinkedList[T]{Head: NewNode(data), Length: 0}
+	return &LinkedList[T]{Head: NewNode(data)}
 }
 
 // IsEmpty 是否为空
 func (ll *LinkedList[T]) IsEmpty() bool {
-	// ll.Head.Next == nil ||
-	return ll.Length == 0
+	return ll.Head.Next == nil
 }
 
 // InsertHead 头部插入
