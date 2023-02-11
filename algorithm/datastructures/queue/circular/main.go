@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// CircularQueue 循环队列
 type CircularQueue[T any] struct {
 	queue   []T
 	maxsize int
@@ -16,15 +17,18 @@ func NewCircularQueue[T any](maxsize int) *CircularQueue[T] {
 	}
 }
 
+// IsEmpty 队列空
 func (cq *CircularQueue[T]) IsEmpty() bool {
 	return cq.rear == cq.front
 }
 
+// IsFull 队列满
 func (cq *CircularQueue[T]) IsFull() bool {
 	// 栈满的条件，循环队列会空一格
 	return (cq.rear+1)%cq.maxsize == cq.front
 }
 
+// EnQueue 入队
 func (cq *CircularQueue[T]) EnQueue(item T) bool {
 	if cq.IsFull() {
 		return false
@@ -35,6 +39,7 @@ func (cq *CircularQueue[T]) EnQueue(item T) bool {
 	return true
 }
 
+// DeQueue 出队
 func (cq *CircularQueue[T]) DeQueue() (item T) {
 	if cq.IsEmpty() {
 		return item

@@ -12,18 +12,16 @@ type ArrayQueue[T any] struct {
 func NewArrayQueue[T any](max int) *ArrayQueue[T] {
 	return &ArrayQueue[T]{
 		data: make([]T, 0, max),
-		max:  max,
-		n:    0,
 	}
 }
 
 func (queue *ArrayQueue[T]) IsEmpty() bool {
-	return queue.n == 0
+	return len(queue.data) == 0
 }
 
 // EnQueue 入队列
 func (queue *ArrayQueue[T]) EnQueue(item T) bool {
-	if queue.n < queue.max {
+	if len(queue.data) < cap(queue.data) {
 		queue.data = append(queue.data, item)
 		queue.n++
 		return true
