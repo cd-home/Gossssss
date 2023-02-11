@@ -2,8 +2,10 @@ package main
 
 import "fmt"
 
+// ShellSort 希尔排序, 优化插入排序
 func ShellSort(arr []int) {
 	n := len(arr)
+	// increment 一直到1
 	for increment := n / 2; increment > 0; increment /= 2 {
 		// 插入排序
 		for i := increment; i < n; i++ {
