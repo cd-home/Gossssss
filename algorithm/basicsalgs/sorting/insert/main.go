@@ -6,14 +6,14 @@ func InsertionSort(arr []int) {
 	n := len(arr)
 	// 从1开始, 假定0位置有序
 	for i := 1; i < n; i++ {
-		cur := arr[i]
+		tmp := arr[i]
 		j := i
 		// 0 ~ j 的位置已经排好序
-		for ; j >= 1 && arr[j-1] > cur; j-- {
+		for ; j >= 1 && arr[j-1] > tmp; j-- {
 			// 后移一位
 			arr[j] = arr[j-1]
 		}
-		arr[j] = cur
+		arr[j] = tmp
 	}
 }
 
