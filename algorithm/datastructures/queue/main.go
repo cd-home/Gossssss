@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// ArrayQueue 数组构造队列 [受限数据结构]
 type ArrayQueue[T any] struct {
 	data []T
 	max  int
@@ -20,6 +21,7 @@ func (queue *ArrayQueue[T]) IsEmpty() bool {
 	return queue.n == 0
 }
 
+// EnQueue 入队列
 func (queue *ArrayQueue[T]) EnQueue(item T) bool {
 	if queue.n < queue.max {
 		queue.data = append(queue.data, item)
@@ -29,6 +31,7 @@ func (queue *ArrayQueue[T]) EnQueue(item T) bool {
 	return false
 }
 
+// DeQueue 出队列
 func (queue *ArrayQueue[T]) DeQueue() (item T) {
 	if queue.IsEmpty() {
 		return item
