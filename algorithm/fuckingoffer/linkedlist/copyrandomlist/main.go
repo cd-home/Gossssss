@@ -35,6 +35,41 @@ func copyRandomList(head *Node) *Node {
 	return m[head]
 }
 
+func copyRandomList2(head *Node) *Node {
+	var cur = head
+	for cur != nil {
+		node := &Node{Val: cur.Val}
+		node.Next = cur.Next
+		cur.Next = node
+		// cur 要指向原始节点
+		cur = node.Next
+	}
+	// 处理 random 问题
+	cur = head
+	for cur != nil {
+		if cur.Random != nil {
+			cur.Next.Random = cur.Random.Next
+		}
+		// 遍历的是原始节点
+		cur = cur.Next.Next
+	}
+	// 原链表
+	var pre = head
+	// 新链表
+	var res = head.Next
+	cur = head.Next
+	for cur.Next != nil {
+		// 拆分链表
+		pre.Next = pre.Next.Next
+		cur.Next = cur.Next.Next
+		pre = pre.Next
+		cur = cur.Next
+	}
+	// 处理原链表最后一个指向了新的节点问题
+	pre.Next = nil
+	return res
+}
+
 func main() {
 
 }
