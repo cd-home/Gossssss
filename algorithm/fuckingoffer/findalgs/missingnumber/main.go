@@ -17,8 +17,10 @@ func missingNumber(nums []int) int {
 	left, right := 0, len(nums)-1
 	for left <= right {
 		mid := (left + right) >> 1
+		// 如果相等那么出问题的一定在右边
 		if nums[mid] == mid {
 			left = mid + 1
+			// 否则在左边
 		} else {
 			right = mid - 1
 		}
