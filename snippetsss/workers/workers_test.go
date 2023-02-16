@@ -1,5 +1,0 @@
-package workers
-
-func main() {
-
-}
