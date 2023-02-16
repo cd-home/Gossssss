@@ -1,14 +1,14 @@
 package main
 
-type Tree struct {
+type TreeNode struct {
 	Data  int
-	Left  *Tree
-	Right *Tree
+	Left  *TreeNode
+	Right *TreeNode
 }
 
-func preOrderTraversal(root *Tree) []int {
+func preOrderTraversal(root *TreeNode) []int {
 	var res []int
-	stack := make([]*Tree, 0)
+	stack := make([]*TreeNode, 0)
 	stack = append(stack, root)
 	// root 判断可以拿出去
 	for root != nil && len(stack) > 0 {
@@ -25,9 +25,9 @@ func preOrderTraversal(root *Tree) []int {
 	return res
 }
 
-func inOrderTraversal(root *Tree) []int {
+func inOrderTraversal(root *TreeNode) []int {
 	var res []int
-	stack := make([]*Tree, 0)
+	stack := make([]*TreeNode, 0)
 	cur := root
 	for cur != nil || len(stack) > 0 {
 		// 不停的找到最左
@@ -45,9 +45,9 @@ func inOrderTraversal(root *Tree) []int {
 	return res
 }
 
-func postOrderTraversal(root *Tree) []int {
+func postOrderTraversal(root *TreeNode) []int {
 	var temp []int
-	stack := make([]*Tree, 0)
+	stack := make([]*TreeNode, 0)
 	stack = append(stack, root)
 	//  中 右 左
 	for root != nil && len(stack) > 0 {

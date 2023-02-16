@@ -1,18 +1,18 @@
 package main
 
-type Tree struct {
+type TreeNode struct {
 	Data  int
-	Left  *Tree
-	Right *Tree
+	Left  *TreeNode
+	Right *TreeNode
 }
 
 // preOrderTraversal 先序遍历
-func preOrderTraversal(root *Tree) []int {
+func preOrderTraversal(root *TreeNode) []int {
 	// 返回的结果
 	var res []int
 	// 声明递归函数
-	var preOrder func(*Tree, *[]int)
-	preOrder = func(node *Tree, res *[]int) {
+	var preOrder func(*TreeNode, *[]int)
+	preOrder = func(node *TreeNode, res *[]int) {
 		if node != nil {
 			*res = append(*res, node.Data)
 			preOrder(node.Left, res)
@@ -24,10 +24,10 @@ func preOrderTraversal(root *Tree) []int {
 }
 
 // inOrderTraversal 中序遍历
-func inOrderTraversal(root *Tree) []int {
+func inOrderTraversal(root *TreeNode) []int {
 	var res []int
-	var inOrder func(*Tree, *[]int)
-	inOrder = func(node *Tree, res *[]int) {
+	var inOrder func(*TreeNode, *[]int)
+	inOrder = func(node *TreeNode, res *[]int) {
 		inOrder(node.Left, res)
 		*res = append(*res, node.Data)
 		inOrder(node.Right, res)
@@ -37,10 +37,10 @@ func inOrderTraversal(root *Tree) []int {
 }
 
 // postOrderTraversal 后序遍历
-func postOrderTraversal(root *Tree) []int {
+func postOrderTraversal(root *TreeNode) []int {
 	var res []int
-	var postOrder func(*Tree, *[]int)
-	postOrder = func(node *Tree, res *[]int) {
+	var postOrder func(*TreeNode, *[]int)
+	postOrder = func(node *TreeNode, res *[]int) {
 		postOrder(node.Left, res)
 		postOrder(node.Right, res)
 		*res = append(*res, node.Data)
