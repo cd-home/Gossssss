@@ -6,6 +6,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
+// levelOrder 层序遍历 广度搜索
 func levelOrder(root *TreeNode) [][]int {
 	var res [][]int
 	// 队列
