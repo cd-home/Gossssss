@@ -1,8 +1,4 @@
-package substring
-
-import (
-	"testing"
-)
+package main
 
 func FirstSubStringIndex(source, target string) (i int) {
 	if source == "" || target == "" {
@@ -18,7 +14,6 @@ func FirstSubStringIndex(source, target string) (i int) {
 	return -1
 }
 
-func TestSubString(t *testing.T) {
-	index := FirstSubStringIndex("abcdefghij", "cde")
-	t.Log(index)
+func main() {
+
 }

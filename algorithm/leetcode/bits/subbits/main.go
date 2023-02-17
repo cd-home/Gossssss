@@ -1,8 +1,4 @@
-package subbits
-
-import (
-	"testing"
-)
+package main
 
 // 数组所有子集情况，不包括空集合 n^2 - 1
 /*
@@ -19,6 +15,7 @@ import (
 	2. 01位置序列就是数组子集的序列，恰好01序列又对应2^n - 1数字
 	3. 可以最终转换为求2^n - 1中所有的数二进制表示
 */
+
 func SubSets(nums []uint) (ans [][]uint) {
 
 	var n = uint(len(nums))
@@ -44,6 +41,6 @@ func SubSets(nums []uint) (ans [][]uint) {
 	return
 }
 
-func TestSubSets(t *testing.T) {
+func main() {
 
 }

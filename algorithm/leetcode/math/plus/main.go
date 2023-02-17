@@ -1,9 +1,4 @@
-package plus
-
-import (
-	"fmt"
-	"testing"
-)
+package main
 
 func Plus(a, b int) int {
 	if a == 0 && b == 0 {
@@ -18,6 +13,6 @@ func Plus(a, b int) int {
 	return Plus((a&b)<<1, a^b)
 }
 
-func TestPlusWithout(t *testing.T) {
-	fmt.Println(Plus(2, 5))
+func main() {
+
 }
