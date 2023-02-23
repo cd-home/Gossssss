@@ -28,10 +28,10 @@ func DeferReturn() (t int) { //1: 初始值为0  3: 被修改为2
 }
 func main() {
 	//fmt.Println(foo())
-	fmt.Println(foo2())
+	//fmt.Println(foo2())
 	//fmt.Println(DeferReturn())
 
-	fmt.Println(DeferF2(1))
+	fmt.Println(DeferF1(1))
 }
 
 func DeferF1(i int) (t int) {
