@@ -1,7 +1,7 @@
 package main
 
 import (
-	api "Gossssss/go.dev/http/examples"
+	api "Gossssss/go.dev/webprogramming/examples"
 )
 
 func main() {
