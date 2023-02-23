@@ -19,6 +19,7 @@ func main() {
 	fmt.Println(e)
 
 	// short method
+	// 函数内部 声明、并且初始化
 	s := "God Yao"
 	fmt.Println(s)
 }
