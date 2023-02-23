@@ -2,6 +2,11 @@ package main
 
 import "fmt"
 
+/*
+	用于 序列(array slice string)、映射 遍历
+	通道读取
+*/
+
 func main() {
 	nums := []int{1, 2, 3, 4}
 	fmt.Println(nums)
