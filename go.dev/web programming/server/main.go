@@ -1,6 +1,8 @@
 package main
 
-import api "Gossssss/go.dev/tour/http/examples"
+import (
+	api "Gossssss/go.dev/http/examples"
+)
 
 func main() {
 	//api.SimpleServer()
