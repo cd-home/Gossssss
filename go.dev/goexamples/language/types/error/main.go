@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
+	// error 是内置的 接口类型, error 通常和nil比较
+	// go 语言地道的用法是将错误作为函数最后一个返回值
 	v, err := division(10, 2)
 	if err != nil {
 		fmt.Println(err.Error())
@@ -20,8 +22,8 @@ func main() {
 		fmt.Println(v1)
 	}
 
-	v2, err := division2(100, 0)
-	if err != nil {
+	// 这也是一种比较习惯的用法, if err inline模式来判断错误
+	if v2, err := division2(100, 0); err != nil {
 		fmt.Println(err.Error())
 	} else {
 		fmt.Println(v2)
