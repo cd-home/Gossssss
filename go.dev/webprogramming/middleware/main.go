@@ -1,6 +1,7 @@
-package http
+package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"time"
@@ -54,4 +55,31 @@ func Chain(f http.HandlerFunc, middlewares ...Middleware) http.HandlerFunc {
 		f = m(f)
 	}
 	return f
+}
+
+func logging(f http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		log.Println(r.Host, r.Method, r.URL)
+		f(w, r)
+	}
+}
+
+func foo(w http.ResponseWriter, r *http.Request) {
+	_, _ = fmt.Fprintln(w, "foo")
+}
+
+func bar(w http.ResponseWriter, r *http.Request) {
+	_, _ = fmt.Fprintln(w, "bar")
+}
+
+func Hello(w http.ResponseWriter, r *http.Request) {
+	_, _ = fmt.Fprintln(w, "hello world")
+}
+
+func main() {
+	http.HandleFunc("/foo", logging(foo))
+	http.HandleFunc("/bar", logging(bar))
+
+	http.HandleFunc("/hello", Chain(Hello, Method("GET"), Logging()))
+	_ = http.ListenAndServe(":8080", nil)
 }
