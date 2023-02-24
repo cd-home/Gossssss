@@ -11,10 +11,12 @@ func main() {
 	nums := []int{1, 2, 3, 4}
 	fmt.Println(nums)
 
+	// index, element
 	for i, num := range nums {
 		fmt.Println(i, num)
 	}
 
+	// key, value
 	m := map[string]string{"a": "apple", "b": "banana"}
 	for k, v := range m {
 		fmt.Println(k, v)
@@ -25,6 +27,7 @@ func main() {
 		fmt.Println(i, c)
 	}
 
+	// index byte位置 rune==uint32
 	for i, c := range "collection" {
 		fmt.Println(i, c)
 	}
