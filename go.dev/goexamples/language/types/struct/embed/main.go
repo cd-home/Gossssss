@@ -33,7 +33,7 @@ func main() {
 	// 内嵌结构体的方法也变成了容器的方法
 	fmt.Println(co.describe())
 
-	// 既然容器实现了其方法, 那么就能够赋值接口变量
+	// 既然容器"继承"了其方法, 那么就能够赋值接口变量
 	var d describer = co
 	fmt.Println(d.describe())
 }
