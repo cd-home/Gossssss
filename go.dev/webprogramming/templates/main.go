@@ -1,4 +1,4 @@
-package http
+package main
 
 import (
 	"net/http"
@@ -22,8 +22,7 @@ func Template(rw http.ResponseWriter, r *http.Request) {
 	_ = t.Execute(rw, data)
 }
 
-
-func TemplateServer() {
-	http.HandleFunc("/template", logging(Template))
-	http.ListenAndServe(":8080", nil)
+func main() {
+	http.HandleFunc("/template", Template)
+	_ = http.ListenAndServe(":8080", nil)
 }
