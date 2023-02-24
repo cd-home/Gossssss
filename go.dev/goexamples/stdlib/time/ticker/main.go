@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	// 打点器， 重复执行
+	// 打点器， 重复执行; timer是未来某个时刻; ticker 是重复任务
 	ticker := time.NewTicker(500 * time.Millisecond)
 	done := make(chan bool)
 
