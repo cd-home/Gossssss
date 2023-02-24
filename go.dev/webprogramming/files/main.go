@@ -1,4 +1,4 @@
-package http
+package main
 
 import (
 	"fmt"
@@ -45,14 +45,14 @@ func UploadFiles(writer http.ResponseWriter, request *http.Request) {
 // Download file
 func Download(w http.ResponseWriter, r *http.Request) {
 	path, _ := os.Getwd()
-	file, _ := os.Open(path + "/go.dev/tour/http/examples/file.go")
+	file, _ := os.Open(path + "/go.dev/tour/webprogramming/files/main.go")
 	defer file.Close()
 	w.Header().Set("Content-Disposition", `attachment; filename=`+file.Name())
 	io.Copy(w, file)
 }
 
-func FileUpAndDownServer() {
+func main() {
 	http.HandleFunc("/upload", UploadFile)
 	http.HandleFunc("/dw", Download)
-	http.ListenAndServe(":8080", nil)
+	_ = http.ListenAndServe(":8080", nil)
 }
