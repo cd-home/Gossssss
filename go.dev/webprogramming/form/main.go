@@ -1,4 +1,4 @@
-package http
+package main
 
 import (
 	"fmt"
@@ -30,7 +30,7 @@ func GetRequest(writer http.ResponseWriter, request *http.Request) {
 	//f, header, _ := request.FormFile("upload")
 }
 
-func GetRequestServer() {
+func main() {
 	http.HandleFunc("/params", GetRequest)
-	http.ListenAndServe(":8080", nil)
+	_ = http.ListenAndServe(":8080", nil)
 }
