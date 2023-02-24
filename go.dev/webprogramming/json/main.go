@@ -1,4 +1,4 @@
-package http
+package main
 
 import (
 	"encoding/json"
@@ -37,16 +37,16 @@ type DecodeInputJSON struct {
 	Author string `json:"author"`
 }
 
-// EncodeJSON Handler
+// DecodeJSON Handler
 func DecodeJSON(rw http.ResponseWriter, r *http.Request) {
 	var decodeInputJson DecodeInputJSON
 	json.NewDecoder(r.Body).Decode(&decodeInputJson)
 	fmt.Fprintf(rw, "%s %s", decodeInputJson.Title, decodeInputJson.Author)
 }
 
-func JSONServer() {
+func main() {
 	// http.HandleFunc("/", HelloWorld)
 	http.HandleFunc("/encode", EncodeJSON)
 	http.HandleFunc("/decode", DecodeJSON)
-	http.ListenAndServe(":8080", nil)
+	_ = http.ListenAndServe(":8080", nil)
 }
