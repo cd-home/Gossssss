@@ -1,4 +1,4 @@
-package http
+package main
 
 import (
 	"encoding/json"
@@ -34,21 +34,21 @@ func SetCookies(rw http.ResponseWriter, r *http.Request) {
 	// Set HTTP Code
 	rw.WriteHeader(http.StatusOK)
 	data, _ := json.Marshal(rsp)
-	fmt.Fprintln(rw, string(data))
+	_, _ = fmt.Fprintln(rw, string(data))
 }
 
-// SetCookies Handler
+// GetCookies Handler
 func GetCookies(rw http.ResponseWriter, r *http.Request) {
 	ck, _ := r.Cookie("GodYao")
 
 	rw.Header().Set("Location", "https://www.baidu.com")
 	// rw.WriteHeader(http.StatusMovedPermanently) // 永久重定向
 	rw.WriteHeader(http.StatusFound) // 临时重定向
-	fmt.Fprintln(rw, string(ck.Name+ck.Value))
+	_, _ = fmt.Fprintln(rw, string(ck.Name+ck.Value))
 }
 
-func CookieServer() {
+func main() {
 	http.HandleFunc("/setcookie", SetCookies)
 	http.HandleFunc("/getcookie", GetCookies)
-	http.ListenAndServe(":8080", nil)
+	_ = http.ListenAndServe(":8080", nil)
 }
