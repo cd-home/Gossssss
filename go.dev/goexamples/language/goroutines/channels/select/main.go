@@ -22,6 +22,8 @@ func main() {
 	// 注意如果time.After放在select里面，每次select都会重置
 	c := time.After(4 * time.Second)
 
+	// select 可以同时等待多个channel的操作
+	// 通常是读、也可以写
 	for {
 		select {
 		case v1 := <-c1:
@@ -33,4 +35,6 @@ func main() {
 			return
 		}
 	}
+	// select 如果有多个case可以执行, 那么会随机选择一个
+	// select 如果没有可执行的, 如果有default走default, 没有就会阻塞住
 }
