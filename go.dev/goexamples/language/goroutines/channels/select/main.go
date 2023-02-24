@@ -36,5 +36,18 @@ func main() {
 		}
 	}
 	// select 如果有多个case可以执行, 那么会随机选择一个
-	// select 如果没有可执行的, 如果有default走default, 没有就会阻塞住
+	// select 如果没有可执行的
+	// 如果有default走default, 没有就会阻塞住
+
+}
+
+func NonBlocking() {
+	messages := make(chan string)
+	// 通常在某个时机做一次性检测
+	select {
+	case msg := <-messages:
+		fmt.Println(msg)
+	default:
+		fmt.Println("Non-Blocking")
+	}
 }
