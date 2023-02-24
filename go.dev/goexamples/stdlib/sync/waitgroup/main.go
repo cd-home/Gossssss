@@ -6,8 +6,9 @@ import (
 	"time"
 )
 
-// wg 必须通过指针传递，A WaitGroup must not be copied after first use.
-func wk(id int, wg *sync.WaitGroup)  {
+// wg 如果要传递必须通过指针传递，A WaitGroup must not be copied after first use.
+// 通常 wg 只是借用给子goroutine, 所以尽量不要传递
+func worker(id int) {
 	// 完成一个就 Add(-1)
 	defer wg.Done()
 	fmt.Printf("worker %d staring\n", id)
@@ -15,12 +16,14 @@ func wk(id int, wg *sync.WaitGroup)  {
 	fmt.Printf("worker %d done\n", id)
 }
 
+var wg = sync.WaitGroup{}
+
 func main() {
-	wg := &sync.WaitGroup{}
+
 	for i := 0; i < 5; i++ {
 		// 计数器
 		wg.Add(1)
-		go wk(i, wg)
+		go worker(i)
 	}
 	// 阻塞等待所有的g执行完成
 	wg.Wait()
