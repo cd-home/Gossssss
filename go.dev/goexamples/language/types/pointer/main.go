@@ -1,8 +1,9 @@
 package main
 
 import "fmt"
+
 // 支持指针，允许通过引用传递 来 传递值和数据结构
-// 函数都是值copy
+// 函数参数传递都是值copy
 
 func zeroVal(iVal int) {
 	iVal = 0
