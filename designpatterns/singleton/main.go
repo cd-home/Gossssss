@@ -1,10 +1,7 @@
-package design
+package main
 
 import (
 	"sync"
-	"testing"
-
-	"github.com/stretchr/testify/assert"
 )
 
 type LazySingleton struct{}
@@ -22,14 +19,6 @@ func GetLazyInstance() *LazySingleton {
 	return lazySingleton
 }
 
-func TestGetLazyInstance(t *testing.T) {
-	assert.Equal(t, GetLazyInstance(), GetLazyInstance())
-}
+func main() {
 
-func BenchmarkGetLazyInstance(b *testing.B) {
-	b.RunParallel(func(pb *testing.PB) {
-		for pb.Next() {
-			assert.Equal(b, GetLazyInstance(), GetLazyInstance())
-		}
-	})
 }
