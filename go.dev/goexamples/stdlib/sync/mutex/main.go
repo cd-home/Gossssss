@@ -2,55 +2,43 @@ package main
 
 import (
 	"fmt"
-	"math/rand"
 	"sync"
-	"sync/atomic"
-	"time"
 )
 
+// Container
+// 通过 mutex 加锁的方式在goroutines之间安全的访问数据
+type Container struct {
+	mu       sync.Mutex
+	counters map[string]int
+}
+
+func (c *Container) inc(name string) {
+	// 代码临界区
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.counters[name]++
+}
+
 func main() {
-	// 使用lock对数据的同步操作，安全的访问数据
-	var state = make(map[int]int)
-	var mutex = sync.Mutex{}
+	c := Container{
+		counters: map[string]int{"a": 0, "b": 0},
+	}
+	var wg sync.WaitGroup
 
-	var readOps uint64
-	var writeOps uint64
-
-	for r := 0; r < 100; r++ {
-		go func() {
-			total := 0
-			for {
-				key := rand.Intn(5)
-				mutex.Lock()
-				// state跨越多个g，同步lock同步
-				total += state[key]
-				mutex.Unlock()
-				atomic.AddUint64(&readOps, 1)
-				time.Sleep(time.Millisecond)
-			}
-		}()
+	doIncrement := func(name string, n int) {
+		for i := 0; i < n; i++ {
+			c.inc(name)
+		}
+		wg.Done()
 	}
 
-	for w := 0; w < 100; w++ {
-		go func() {
-			for {
-				key := rand.Intn(5)
-				value := rand.Intn(100)
-				mutex.Lock()
-				// state跨越多个g，同步lock同步
-				state[key] = value
-				mutex.Unlock()
-				atomic.AddUint64(&writeOps, 1)
-				time.Sleep(time.Millisecond)
-			}
-		}()
-	}
+	wg.Add(3)
 
-	time.Sleep(time.Second * 5)
-	fmt.Println("readOps", atomic.LoadUint64(&readOps))
-	fmt.Println("writeOps,", atomic.LoadUint64(&writeOps,))
+	go doIncrement("a", 1000)
+	go doIncrement("a", 1000)
+	go doIncrement("b", 1000)
 
-	mutex.Lock()
-	fmt.Println("state", state)
-	mutex.Unlock()
+	wg.Wait()
+	fmt.Println(c.counters)
+
 }
