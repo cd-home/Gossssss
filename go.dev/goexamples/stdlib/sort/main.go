@@ -19,7 +19,6 @@ func main() {
 
 	fmt.Println(sort.IntsAreSorted(ints))
 
-
 	fruits := []string{"apple", "banana", "peach", "kiwi"}
 	sort.Sort(ByLength(fruits))
 	fmt.Println(fruits)
@@ -31,7 +30,7 @@ func main() {
 	fmt.Println(fruits)
 }
 
-// 定制排序规则 需要实现接口 签名 Len Swap Less
+// ByLength 定制排序规则 需要实现接口 签名 Len Swap Less
 type ByLength []string
 
 func (s ByLength) Len() int {
@@ -45,4 +44,3 @@ func (s ByLength) Swap(i, j int) {
 func (s ByLength) Less(i, j int) bool {
 	return len(s[i]) < len(s[j])
 }
-
