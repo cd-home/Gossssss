@@ -1,14 +1,2 @@
 # Gossssss
-Gossssss
-    ├── README.md
-    ├── algorithm
-    ├── books
-    ├── design
-    ├── docker
-    ├── go.dev
-    ├── go.mod
-    ├── go.sum
-    ├── k8s
-    ├── pkgs
-    ├── snippetsss
-    └── tests
+数据结构、算法、Go语言基础学习
