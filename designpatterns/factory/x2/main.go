@@ -1,11 +1,11 @@
-package design
+package x2
 
 import (
 	"errors"
-	"testing"
+	"fmt"
 )
 
-/// GunFace 公共接口
+// GunFace 公共接口
 type GunFace interface {
 	SetName(name string)
 	SetPower(power int)
@@ -72,9 +72,9 @@ func GetGun(gunType string) (GunFace, error) {
 	}
 }
 
-func TestFactoryMethod2(t *testing.T) {
+func main() {
 	gun, _ := GetGun("AK47")
 	var gunFace GunFace = gun
-	t.Log(gunFace.GetName())
-	t.Log(gunFace.GetPower())
+	fmt.Println(gunFace.GetName())
+	fmt.Println(gunFace.GetPower())
 }

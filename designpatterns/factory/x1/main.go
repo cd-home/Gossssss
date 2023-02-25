@@ -1,7 +1,7 @@
-package design
+package main
 
 import (
-	"testing"
+	"fmt"
 )
 
 // Operator 抽象公共接口
@@ -34,6 +34,7 @@ type PlusOperatorFactory struct{}
 type PlusOperator struct {
 	*OperatorBase
 }
+
 // Result 实现自己的Result逻辑
 func (o PlusOperator) Result() int {
 	return o.A + o.B
@@ -46,6 +47,7 @@ type MinusOperatorFactory struct{}
 type MinusOperator struct {
 	*OperatorBase
 }
+
 // Result 实现自己的Result逻辑
 func (o MinusOperator) Result() int {
 	return o.A / o.B
@@ -55,17 +57,18 @@ func (MinusOperatorFactory) Create() Operator {
 }
 
 func compute(factory OperatorFactoryFace, a, b int) int {
+	// 工厂创建
 	op := factory.Create()
 	op.SetA(a)
 	op.SetB(b)
 	return op.Result()
 }
 
-func TestFactoryMethod(t *testing.T) {
+func main() {
 	var factory OperatorFactoryFace
 	factory = PlusOperatorFactory{}
-	t.Log(compute(factory, 1, 2))
+	fmt.Println(compute(factory, 1, 2))
 
 	factory = MinusOperatorFactory{}
-	t.Log(compute(factory, 4, 2))
+	fmt.Println(compute(factory, 4, 2))
 }
