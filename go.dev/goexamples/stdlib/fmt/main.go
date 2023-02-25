@@ -44,5 +44,5 @@ func main() {
 	fmt.Printf("|%6.2f|%6.2f|\n", 1.2, 3.45)
 	fmt.Printf("|%-6.2f|%-6.2f|\n", 1.2, 3.45)
 
-	fmt.Fprintf(os.Stderr, "Error")
+	_, _ = fmt.Fprintf(os.Stderr, "Error")
 }
