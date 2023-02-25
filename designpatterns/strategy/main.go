@@ -1,11 +1,10 @@
-package strategy
+package main
 
 import (
-	"Gossssss/design/strategy/algs"
-	"testing"
+	"Gossssss/designpatterns/strategy/algs"
 )
 
-func TestStrategy(t *testing.T) {
+func main() {
 	// Client 客户端调用
 	lfu := &algs.Lfu{}
 	cache := algs.InitCache(lfu)
