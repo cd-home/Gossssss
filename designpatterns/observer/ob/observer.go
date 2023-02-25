@@ -1,4 +1,4 @@
-package observer
+package ob
 
 import (
 	"context"
