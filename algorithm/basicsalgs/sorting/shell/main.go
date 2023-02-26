@@ -12,7 +12,7 @@ func ShellSort(arr []int) {
 			tmp := arr[i]
 			j := i
 			// 比较移位
-			for j = i; j >= increment && arr[j-increment] > tmp; j -= increment {
+			for ; j >= increment && arr[j-increment] > tmp; j -= increment {
 				arr[j] = arr[j-increment]
 			}
 			// 赋值
