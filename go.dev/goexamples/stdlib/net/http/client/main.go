@@ -15,8 +15,8 @@ func main() {
 
 	defer resp.Body.Close()
 
-	//bytes, _ := ioutil.ReadAll(resp.Body)
-	//fmt.Println(string(bytes))
+	//bs, _ := io.ReadAll(resp.Body)
+	//fmt.Println(string(bs))
 
 	scanner := bufio.NewScanner(resp.Body)
 	for i := 0; scanner.Scan() && i < 5; i++ {
