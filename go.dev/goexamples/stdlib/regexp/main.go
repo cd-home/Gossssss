@@ -20,4 +20,5 @@ func main() {
 	fmt.Println(r.FindStringSubmatch("peach punch"))
 	fmt.Println(r.FindStringSubmatchIndex("peach punch"))
 
+	fmt.Println(r.ReplaceAllString("a peach", "<fruit>"))
 }
