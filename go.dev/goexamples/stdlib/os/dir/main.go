@@ -50,4 +50,11 @@ func main() {
 
 	// 回到原来的位置
 	os.Chdir("../")
+
+	// 创建临时目录
+	tempDir, err := os.MkdirTemp("", "sampleDir")
+	if err != nil {
+		return
+	}
+	defer os.RemoveAll(tempDir)
 }
