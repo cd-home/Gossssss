@@ -31,4 +31,9 @@ func main() {
 
 	// 文件具柄  更多的文件操作、读、写、信息、权限 4 2 1
 	//os.OpenFile(path, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0644)
+
+	name := "./test.txt"
+	fw, _ := os.Create(name) // 实际上是调用 os.OpenFile
+	fw.WriteString("Hello")
+	fw.Sync()
 }
