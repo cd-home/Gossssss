@@ -36,4 +36,11 @@ func main() {
 	fw, _ := os.Create(name) // 实际上是调用 os.OpenFile
 	fw.WriteString("Hello")
 	fw.Sync()
+
+	// 创建临时文件
+	tempf, err := os.CreateTemp("", "sample")
+	if err != nil {
+		return
+	}
+	defer os.Remove(tempf.Name())
 }
