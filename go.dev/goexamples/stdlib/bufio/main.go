@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// cat ./46-URL.go | go run 50.Filter.go
+	// cat ./main | go run main.go
 	scanner := bufio.NewScanner(os.Stdin)
 
 	for scanner.Scan() {
