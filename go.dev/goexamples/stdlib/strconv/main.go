@@ -6,6 +6,7 @@ import (
 )
 
 func main() {
+	// strconv 字符串转 基础类型
 	// 第二个0  是自动判断进制
 	i, _ := strconv.ParseInt("100", 0, 8)
 	fmt.Println(i)
@@ -18,4 +19,7 @@ func main() {
 
 	k, _ := strconv.Atoi("135")
 	fmt.Println(k)
+
+	b, _ := strconv.ParseBool("true")
+	fmt.Println(b)
 }
