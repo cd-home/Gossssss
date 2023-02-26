@@ -58,7 +58,7 @@ func copyRandomList2(head *Node) *Node {
 		// 遍历的是原始节点, 要跳一个
 		cur = cur.Next.Next
 	}
-	// 原链表
+	// 原链表,此题目中要求最后不能修改原链表
 	var pre = head
 	// 新链表
 	var res = head.Next
@@ -70,7 +70,7 @@ func copyRandomList2(head *Node) *Node {
 		pre = pre.Next
 		cur = cur.Next
 	}
-	// 处理原链表最后一个指向了新的节点问题
+	// 处理原链表最后一个指向了新的复制节点问题
 	pre.Next = nil
 	return res
 }
