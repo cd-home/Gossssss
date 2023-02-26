@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -11,7 +12,8 @@ func main() {
 
 	fmt.Println(value)
 
-	for k, v := range os.Environ() {
-		fmt.Println(k, v)
+	for _, v := range os.Environ() {
+		pair := strings.SplitN(v, "=", 2)
+		fmt.Println(pair)
 	}
 }
