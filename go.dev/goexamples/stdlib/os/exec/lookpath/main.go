@@ -16,6 +16,7 @@ func main() {
 
 	env := os.Environ()
 
+	// 用另一个进程完全替换当前的go进程
 	execErr := syscall.Exec(binary, args, env)
 	if execErr != nil {
 		panic(execErr)
