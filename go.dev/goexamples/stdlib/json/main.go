@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"time"
 )
-// 只有 可导出 的字段才会被 JSON 编码/解码
+
+// User 只有 可导出 的字段才会被 JSON 编码/解码
 type User struct {
 	Name string `json:"name"`
 	// 如果是零值就不会输出
