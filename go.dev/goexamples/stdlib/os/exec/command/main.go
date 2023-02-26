@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"io"
-	"os"
 	"os/exec"
 )
 
@@ -20,16 +19,13 @@ func ExecCommand() {
 	fmt.Println("> date")
 	fmt.Println(string(output))
 
-	// 如需要反复使用该命令, 需要重置底层的进程
-	dateCmd.Process = nil
-	dateCmd.ProcessState = nil
-
-	// 主动指定output
-	dateCmd.Stdout = os.Stdout
-	err = dateCmd.Run()
+	lsCmd := exec.Command("bash", "-c", "ls -a -l -h")
+	lsOut, err := lsCmd.Output()
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("> ls -a -l -h")
+	fmt.Println(string(lsOut))
 }
 
 func PipLineExec() {
