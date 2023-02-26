@@ -25,4 +25,14 @@ func main() {
 	// format parse
 	fmt.Println(time.Now().Format(time.RFC3339))
 	fmt.Println(time.Now().Format("2006-01-02 15:04:05"))
+
+	fmt.Println(time.Now().Add(time.Hour))
+
+	fmt.Println(time.Now().AddDate(0, 0, 1))
+
+	duration, err := time.ParseDuration("1h30m")
+	if err != nil {
+		return
+	}
+	fmt.Println(duration)
 }
