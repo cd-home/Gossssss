@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/fs"
 	"path/filepath"
 	"strings"
 )
@@ -38,4 +39,9 @@ func main() {
 		fmt.Println(err)
 	}
 	fmt.Println(rel)
+
+	// 采用 WalkDir
+	filepath.WalkDir("", func(path string, d fs.DirEntry, err error) error {
+		return nil
+	})
 }
