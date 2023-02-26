@@ -11,11 +11,11 @@ func main() {
 	sigs := make(chan os.Signal, 1)
 	done := make(chan struct{}, 1)
 
+	// 监听信号
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 
 	go func() {
 		sig := <-sigs
-		fmt.Println()
 		fmt.Println(sig)
 		done <- struct{}{}
 	}()
