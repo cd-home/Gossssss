@@ -12,5 +12,5 @@ func main() {
 }
 
 func HelloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello World!")
+	_, _ = fmt.Fprint(w, "Hello World!")
 }
