@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"io/fs"
 	"os"
 	"path/filepath"
 )
@@ -31,18 +32,19 @@ func main() {
 		fmt.Println(entry.Name(), entry.IsDir(), entry.Type())
 	}
 
-	os.Chdir("./Go Code Style")
+	// 改变当前的工作目录
+	os.Chdir("./books")
 	c, err = os.ReadDir(".")
 	CheckErr(err)
 	for _, entry := range c {
 		fmt.Println(entry.Name(), entry.IsDir(), entry.Type())
 	}
 
-	filepath.Walk(".", func(path string, info os.FileInfo, err error) error {
+	filepath.WalkDir(".", func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
 		}
-		fmt.Println(info.Name())
+		fmt.Println(d.Name())
 		return nil
 	})
 
