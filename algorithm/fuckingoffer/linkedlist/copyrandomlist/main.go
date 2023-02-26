@@ -36,6 +36,10 @@ func copyRandomList(head *Node) *Node {
 }
 
 func copyRandomList2(head *Node) *Node {
+	if head == nil {
+		return nil
+	}
+	// 构造新的链表 A->A1->B->B1->C->C1
 	var cur = head
 	for cur != nil {
 		node := &Node{Val: cur.Val}
@@ -48,9 +52,10 @@ func copyRandomList2(head *Node) *Node {
 	cur = head
 	for cur != nil {
 		if cur.Random != nil {
+			// 新节点的 random 指向 当前节点随机节点的新节点 cur.Random.Next
 			cur.Next.Random = cur.Random.Next
 		}
-		// 遍历的是原始节点
+		// 遍历的是原始节点, 要跳一个
 		cur = cur.Next.Next
 	}
 	// 原链表
