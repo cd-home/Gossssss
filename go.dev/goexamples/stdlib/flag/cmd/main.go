@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	// 子命令方式
 	fooCmd := flag.NewFlagSet("foo", flag.ExitOnError)
 	fooEnable := fooCmd.Bool("enable", false, "enable")
 	fooName := fooCmd.String("name", "", "name")
