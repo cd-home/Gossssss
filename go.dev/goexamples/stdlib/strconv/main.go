@@ -7,9 +7,12 @@ import (
 
 func main() {
 	// strconv 字符串转 基础类型
-	// 第二个0  是自动判断进制
-	i, _ := strconv.ParseInt("100", 0, 8)
+	// 第二个0  是自动判断字符串的进制  第三个参数指定 "100" bit位数
+	i, _ := strconv.ParseInt("100", 10, 64)
 	fmt.Println(i)
+
+	bs, _ := strconv.ParseInt("11111000", 2, 8)
+	fmt.Println(bs)
 
 	f, _ := strconv.ParseFloat("99.6", 64)
 	fmt.Println(f)
@@ -22,4 +25,5 @@ func main() {
 
 	b, _ := strconv.ParseBool("true")
 	fmt.Println(b)
+
 }
