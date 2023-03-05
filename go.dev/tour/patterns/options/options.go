@@ -1,4 +1,6 @@
-package options
+package main
+
+import "fmt"
 
 type Server struct {
 	Pprof bool
@@ -48,4 +50,12 @@ func (s *Server) WithOptions(opts ...Option) (*Server, error) {
 		opt.apply(c)
 	}
 	return c, nil
+}
+
+func main() {
+	server, _ := NewServer(AddPprof())
+	fmt.Println(server.Pprof)
+
+	server, _ = server.WithOptions(WithDebug(true))
+	fmt.Println(server.Debug)
 }
