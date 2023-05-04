@@ -12,7 +12,7 @@ func main() {
 	done := make(chan struct{}, 1)
 
 	// 监听信号
-	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM, syscall.SIGKILL)
 
 	go func() {
 		sig := <-sigs
