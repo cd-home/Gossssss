@@ -1,13 +1,12 @@
-package errhandle_test
+package main
 
 import (
 	"fmt"
 	"net/http"
-	"testing"
 	"time"
 )
 
-func TestHandGoroutineErr(t *testing.T) {
+func main() {
 	// wrap error
 	type Result struct {
 		Error error

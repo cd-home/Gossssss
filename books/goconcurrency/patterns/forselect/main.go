@@ -1,18 +1,16 @@
-package forselect_test
+package main
 
 import (
 	"context"
 	"fmt"
-	"testing"
 	"time"
 )
 
-func TestForSelectSendDataToChan(t *testing.T) {
-	// for-select
-	/*
-		for {
-			select {}
-		}*/
+func main() {
+	ForSelectSendDataToChan()
+}
+
+func ForSelectSendDataToChan() {
 	ctx, cancelFunc := context.WithTimeout(context.Background(), time.Second*3)
 	defer cancelFunc()
 	producer := func(ctx context.Context) <-chan string {
@@ -41,7 +39,11 @@ func TestForSelectSendDataToChan(t *testing.T) {
 	consumer(producer(ctx))
 }
 
-func TestForeverLoopSelect(t *testing.T) {
+func ForeverLoopSelect() {
+	/*
+		for {
+			select {}
+		}*/
 	ctx, cancelFunc := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancelFunc()
 	producer := func() <-chan int {
@@ -81,7 +83,7 @@ func TestForeverLoopSelect(t *testing.T) {
 	fmt.Println(duration)
 }
 
-func TestForeverLoopSelectDefault(t *testing.T) {
+func ForeverLoopSelectDefault() {
 	ctx, cancelFunc := context.WithTimeout(context.Background(), time.Second*5)
 	defer cancelFunc()
 	producer := func() <-chan int {

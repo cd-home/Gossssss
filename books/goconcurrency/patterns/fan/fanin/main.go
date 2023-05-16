@@ -1,15 +1,14 @@
-package fan_test
+package main
 
 import (
 	"fmt"
 	"math/rand"
 	"runtime"
 	"sync"
-	"testing"
 	"time"
 )
 
-func TestFanIn(t *testing.T) {
+func main() {
 	toInt := func(done <-chan struct{}, valueStream <-chan interface{}) <-chan int {
 		IntStream := make(chan int)
 		go func() {

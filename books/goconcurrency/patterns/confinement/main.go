@@ -1,4 +1,4 @@
-package confinement_test
+package main
 
 import (
 	"bytes"
@@ -7,7 +7,12 @@ import (
 	"testing"
 )
 
-func TestConfinementBad(t *testing.T) {
+func main() {
+	Confinement()
+	ConfinementGood()
+}
+
+func Confinement() {
 	data := make([]int, 10)
 	mock := func(data []int) {
 		for i := 0; i < len(data); i++ {
@@ -15,7 +20,6 @@ func TestConfinementBad(t *testing.T) {
 		}
 	}
 	mock(data)
-
 	// 在 loop 中 我只需要 写
 	loopData := func(handleData chan<- int) {
 		defer close(handleData)
@@ -26,16 +30,14 @@ func TestConfinementBad(t *testing.T) {
 
 	// 但是这里暴露出来了
 	handleData := make(chan int)
-
 	go loopData(handleData)
-
 	// 读
 	for num := range handleData {
 		fmt.Println(num)
 	}
 }
 
-func TestConfinementGood(t *testing.T) {
+func ConfinementGood() {
 	chanOwner := func() <-chan int {
 		// 写操作约束在下面的闭包中, 防止其他g 写入
 		results := make(chan int, 10)

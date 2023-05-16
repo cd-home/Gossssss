@@ -1,13 +1,16 @@
-package preventleak_test
+package main
 
 import (
 	"fmt"
 	"math/rand"
-	"testing"
 	"time"
 )
 
-func TestGoroutineLeak(t *testing.T) {
+func main() {
+	GoroutineLeak()
+}
+
+func GoroutineLeak() {
 	doWork := func(strings <-chan string) <-chan struct{} {
 		completed := make(chan struct{})
 		go func() {
@@ -25,7 +28,7 @@ func TestGoroutineLeak(t *testing.T) {
 	fmt.Println("Done")
 }
 
-func TestNotifyGoroutineExitAvoidLeak(t *testing.T) {
+func NotifyGoroutineExitAvoidLeak() {
 	doWork := func(done <-chan struct{}, strings <-chan string) <-chan struct{} {
 		terminated := make(chan struct{})
 		go func() {
@@ -63,7 +66,7 @@ func TestNotifyGoroutineExitAvoidLeak(t *testing.T) {
 	fmt.Println("done.")
 }
 
-func TestGoroutineBlocked(t *testing.T) {
+func GoroutineBlocked() {
 	newRandStream := func(done <-chan struct{}) <-chan int {
 		randStream := make(chan int)
 		go func() {

@@ -1,12 +1,15 @@
-package orchannel_test
+package main
 
 import (
 	"fmt"
-	"testing"
 	"time"
 )
 
-func TestOrChannel(t *testing.T) {
+func main() {
+	OrChannel()
+}
+
+func OrChannel() {
 	var or func(channels ...<-chan interface{}) <-chan interface{}
 	or = func(channels ...<-chan interface{}) <-chan interface{} {
 		switch len(channels) {

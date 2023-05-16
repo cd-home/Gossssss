@@ -1,12 +1,15 @@
-package piplines_test
+package main
 
 import (
 	"fmt"
 	"math/rand"
-	"testing"
 )
 
-func TestPipeline(t *testing.T) {
+func main() {
+	Pipeline()
+}
+
+func Pipeline() {
 	generator := func(done <-chan struct{}, integers ...int) <-chan int {
 		intStream := make(chan int)
 		go func() {
@@ -59,7 +62,7 @@ func TestPipeline(t *testing.T) {
 	}
 }
 
-func TestPipeline2(t *testing.T) {
+func Pipeline2() {
 	repeat := func(done <-chan struct{}, values ...interface{}) <-chan interface{} {
 		valueStream := make(chan interface{})
 		go func() {
@@ -113,8 +116,8 @@ func TestPipeline2(t *testing.T) {
 	}
 	done2 := make(chan struct{})
 	defer close(done2)
-	rand := func() interface{} { return rand.Int() }
-	for num := range take(done2, repeatFn(done2, rand), 10) {
+	randNum := func() interface{} { return rand.Int() }
+	for num := range take(done2, repeatFn(done2, randNum), 10) {
 		fmt.Println(num)
 	}
 }
