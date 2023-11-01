@@ -20,7 +20,7 @@ func main() {
 	// ...
 	dataCh := make(chan int, 100)
 
-	// the sender
+	// 1: the sender
 	go func() {
 		for {
 			if value := rand.Intn(MaxRandomNumber); value == 0 {
@@ -34,7 +34,7 @@ func main() {
 		}
 	}()
 
-	// receivers
+	// N: receivers
 	for i := 0; i < NumReceivers; i++ {
 		go func() {
 			defer wgReceivers.Done()

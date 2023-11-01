@@ -1,12 +1,15 @@
-package scale_test
+package main
 
 import (
 	"fmt"
-	"testing"
 	"time"
 )
 
-func TestHeartBeats(t *testing.T) {
+func main() {
+	HeartBeats()
+}
+
+func HeartBeats() {
 	doWork := func(done <-chan struct{}, pulseInterval time.Duration) (<-chan interface{}, <-chan time.Time) {
 		heartbeats := make(chan interface{})
 		results := make(chan time.Time)
